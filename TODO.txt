@@ -1,1 +1,5 @@
 Log
+Be able to stack Indie Buffstats
+Fix Character Cards
+Remove All Custom Wz edits item Ids (i'll do it)
+Rewrite some coding (i'll do it)
