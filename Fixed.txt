@@ -1,1 +1,12 @@
 --Log--
+Damage Over Time Skills Works Fine
+Duration Status for Mobs and Buffs for mobs works Fine, but sometimes you get DCED i'm not sure if it's a Timer bug idk
+Wheel of Marvels Work
+Mining Work
+Profession Reactors work and will be respawned after 5 mins
+Added most Link Skills for Classes
+Familiars Are partially fixed, i think SPAWN_FAMILIAR value is Incorrect, it dc in 3rd party
+Lightning God Ring is Fixed with Angelic Blessing (See MapleStat Effect to see Maplestatinfo, and then Edit on the xml)
+Updated some Buffstats
+Correct Exp Table
+Added custom Rewards
