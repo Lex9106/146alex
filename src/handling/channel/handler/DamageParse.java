@@ -591,6 +591,10 @@ public static MapleStatEffect c;
                 player.dropMessage(5, "ApplyTo");
                 }
         }
+        if (player.getSkillLevel(3210013) > 0) {
+                    MapleStatEffect sse = SkillFactory.getSkill(3210013).getEffect(player.getSkillLevel(3210013));
+                    sse.applyTo(player);
+                }
         if (player.getJob() >= 1500 && player.getJob() <= 1512) {
             MapleStatEffect crescendo = SkillFactory.getSkill(15001022).getEffect(player.getSkillLevel(15001022));
             if (crescendo != null) {
