@@ -190,8 +190,10 @@ public class InterServerHandler {
         }
         c.updateLoginState(MapleClient.LOGIN_LOGGEDIN, c.getSessionIPAddress());
         channelServer.addPlayer(player);   
+        
         c.getSession().write(CWvsContext.updateCrowns(new int[]{-1, -1, -1, -1, -1}));
         c.getSession().write(CField.getCharInfo(player));
+        
         //PlayersHandler.calcHyperSkillPointCount(c);//
         c.getSession().write(CSPacket.enableCSUse());
         c.getSession().write(CWvsContext.updateSkills(c.getPlayer().getSkills(), false));//skill to 0 "fix"

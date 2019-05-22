@@ -959,7 +959,7 @@ public class PlayerStats implements Serializable {
         return psdSkills;
     }
 
-    private void handlePassiveSkills(MapleCharacter chra) {
+    private void handlePassiveSkills(final MapleCharacter chra) {
         Skill bx;
         int bof;
         MapleStatEffect eff;

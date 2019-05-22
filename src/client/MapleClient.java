@@ -828,37 +828,45 @@ public class MapleClient implements Serializable {
         }
     }
 
-    public final byte getLoginState() { // TODO hide?
+    public final byte getLoginState() { // TODO: Hide?
         Connection con = DatabaseConnection.getConnection();
         try {
             PreparedStatement ps;
             ps = con.prepareStatement("SELECT loggedin, lastlogin, banned, `birthday` + 0 AS `bday` FROM accounts WHERE id = ?");
             ps.setInt(1, getAccID());
-            byte state;
-            try (ResultSet rs = ps.executeQuery()) {
-                if (!rs.next() || rs.getInt("banned") > 0) {
-                    ps.close();
-                    rs.close();
-                    session.close();
-                    throw new DatabaseException("Account doesn't exist or is banned");
-                }
-                birthday = rs.getInt("bday");
-                state = rs.getByte("loggedin");
-                if (state == MapleClient.LOGIN_SERVER_TRANSITION || state == MapleClient.CHANGE_CHANNEL) {
-                    if (rs.getTimestamp("lastlogin").getTime() + 20000 < System.currentTimeMillis()) { // connecting to chanserver timeout
-                        state = MapleClient.LOGIN_NOTLOGGEDIN;
-                        updateLoginState(state, getSessionIPAddress());
-                    }
-                }
+            ResultSet rs = ps.executeQuery();
+            if (!rs.next() || rs.getInt("banned") > 0) {
+                ps.close();
+                rs.close();
+                session.close();
+                throw new DatabaseException("Account doesn't exist or is banned");
             }
+            birthday = rs.getInt("bday");
+            byte state = rs.getByte("loggedin");
+
+            if (state == MapleClient.LOGIN_SERVER_TRANSITION || state == MapleClient.CHANGE_CHANNEL) {
+                if (rs.getTimestamp("lastlogin").getTime() + 20000 < System.currentTimeMillis()) { // Connecting to chanserver timeout
+                    state = MapleClient.LOGIN_NOTLOGGEDIN;
+                    updateLoginState(state, getSessionIPAddress());
+                }
+            }else if (state == LOGIN_LOGGEDIN && player == null) {
+                        state = LOGIN_LOGGEDIN;
+                        updateLoginState(LOGIN_LOGGEDIN, getSessionIPAddress());
+            }
+            rs.close();
             ps.close();
-            loggedIn = state == MapleClient.LOGIN_LOGGEDIN;
+            if (state == MapleClient.LOGIN_LOGGEDIN) {
+                loggedIn = true;
+            } else {
+                loggedIn = false;
+            }
             return state;
         } catch (SQLException e) {
             loggedIn = false;
-            throw new DatabaseException("error getting login state", e);
+            throw new DatabaseException("Error getting login state", e);
         }
     }
+
 
     public final boolean checkBirthDate(final int date) {
         return birthday == date;
@@ -975,126 +983,126 @@ public class MapleClient implements Serializable {
         }
     }
 
-    public final void disconnect(final boolean RemoveInChannelServer, final boolean fromCS) {
-        disconnect(RemoveInChannelServer, fromCS, false);
-    }
+  public final void disconnect(boolean RemoveInChannelServer, boolean fromCS) {
+    disconnect(RemoveInChannelServer, fromCS, false);
+  }
 
-    public final void disconnect(final boolean RemoveInChannelServer, final boolean fromCS, final boolean shutdown) {
-        this.sl.dump();
-        if (player != null) {
-            MapleMap map = player.getMap();
-            final MapleParty party = player.getParty();
-            final boolean clone = player.isClone();
-            final String namez = player.getName();
-            final int idz = player.getId(), messengerid = player.getMessenger() == null ? 0 : player.getMessenger().getId(), gid = player.getGuildId(), fid = player.getFamilyId();
-            final BuddyList bl = player.getBuddylist();
-            final MaplePartyCharacter chrp = new MaplePartyCharacter(player);
-            final MapleMessengerCharacter chrm = new MapleMessengerCharacter(player);
-            final MapleGuildCharacter chrg = player.getMGC();
-            final MapleFamilyCharacter chrf = player.getMFC();
+  public final void disconnect(boolean RemoveInChannelServer, boolean fromCS, boolean shutdown) {
+    if (this.player != null) {
+      MapleMap map = this.player.getMap();
+      MapleParty party = this.player.getParty();
+      boolean clone = this.player.isClone();
+      String namez = this.player.getName();
+      int idz = this.player.getId(); int messengerid = this.player.getMessenger() == null ? 0 : this.player.getMessenger().getId(); int gid = this.player.getGuildId(); int fid = this.player.getFamilyId();
+      BuddyList bl = this.player.getBuddylist();
+      MaplePartyCharacter chrp = new MaplePartyCharacter(this.player);
+      MapleMessengerCharacter chrm = new MapleMessengerCharacter(this.player);
+      MapleGuildCharacter chrg = this.player.getMGC();
+      MapleFamilyCharacter chrf = this.player.getMFC();
 
-            removalTask(shutdown);
-            LoginServer.getLoginAuth(player.getId());
-            player.saveToDB(true, fromCS);
-            if (shutdown) {
-                player = null;
-                receiving = false;
-                return;
-            }
+      removalTask(shutdown);
+      //LoginServer.getLoginAuth(this.player.getId());
+      this.player.saveToDB(true, fromCS);
+      if (shutdown) {
+        this.player = null;
+        this.receiving = false;
+        return;
+      }
 
-            if (!fromCS) {
-                final ChannelServer ch = ChannelServer.getInstance(map == null ? channel : map.getChannel());
-                final int chz = World.Find.findChannel(idz);
-                if (chz < -1) {
-                    disconnect(RemoveInChannelServer, true);//u lie
-                    return;
-                }
-                try {
-                    if (chz == -1 || ch == null || clone || ch.isShutdown()) {
-                        player = null;
-                        return;//no idea
-                    }
-                    if (messengerid > 0) {
-                        World.Messenger.leaveMessenger(messengerid, chrm);
-                    }
-                    if (party != null) {
-                        chrp.setOnline(false);
-                        World.Party.updateParty(party.getId(), PartyOperation.LOG_ONOFF, chrp);
-                        if (map != null && party.getLeader().getId() == idz) {
-                            MaplePartyCharacter lchr = null;
-                            for (MaplePartyCharacter pchr : party.getMembers()) {
-                                if (pchr != null && map.getCharacterById(pchr.getId()) != null && (lchr == null || lchr.getLevel() < pchr.getLevel())) {
-                                    lchr = pchr;
-                                }
-                            }
-                            if (lchr != null) {
-                                World.Party.updateParty(party.getId(), PartyOperation.CHANGE_LEADER_DC, lchr);
-                            }
-                        }
-                    }
-                    if (bl != null) {
-                        if (!serverTransition) {
-                            World.Buddy.loggedOff(namez, idz, channel, bl.getBuddyIds());
-                        } else { // Change channel
-                            World.Buddy.loggedOn(namez, idz, channel, bl.getBuddyIds());
-                        }
-                    }
-                    if (gid > 0 && chrg != null) {
-                        World.Guild.setGuildMemberOnline(chrg, false, -1);
-                    }
-                    if (fid > 0 && chrf != null) {
-                        World.Family.setFamilyMemberOnline(chrf, false, -1);
-                    }
-                } catch (final Exception e) {
-                    //FileoutputUtil.outputFileError(FileoutputUtil.Acc_Stuck, e);
-                    System.err.println(getLogMessage(this, "ERROR") + e);
-                } finally {
-                    if (RemoveInChannelServer && ch != null) {
-                        ch.removePlayer(idz, namez);
-                    }
-                    player = null;
-                }
-            } else {
-                final int ch = World.Find.findChannel(idz);
-                if (ch > 0) {
-                    disconnect(RemoveInChannelServer, false);//u lie
-                    return;
-                }
-                try {
-                    if (party != null) {
-                        chrp.setOnline(false);
-                        World.Party.updateParty(party.getId(), PartyOperation.LOG_ONOFF, chrp);
-                    }
-                    if (!serverTransition) {
-                        World.Buddy.loggedOff(namez, idz, channel, bl.getBuddyIds());
-                    } else { // Change channel
-                        World.Buddy.loggedOn(namez, idz, channel, bl.getBuddyIds());
-                    }
-                    if (gid > 0 && chrg != null) {
-                        World.Guild.setGuildMemberOnline(chrg, false, -1);
-                    }
-                    if (fid > 0 && chrf != null) {
-                        World.Family.setFamilyMemberOnline(chrf, false, -1);
-                    }
-                    if (player != null) {
-                        player.setMessenger(null);
-                    }
-                } catch (final Exception e) {
-                    //FileoutputUtil.outputFileError(FileoutputUtil.Acc_Stuck, e);
-                    System.err.println(getLogMessage(this, "ERROR") + e);
-                } finally {
-                    if (RemoveInChannelServer && ch > 0) {
-                        CashShopServer.getPlayerStorage().deregisterPlayer(idz, namez);
-                    }
-                    player = null;
-                }
-            }
+      if (!fromCS) {
+        ChannelServer ch = ChannelServer.getInstance(map == null ? this.channel : map.getChannel());
+        int chz = World.Find.findChannel(idz);
+        if (chz < -1) {
+          disconnect(RemoveInChannelServer, true);
+          return;
         }
-        if (!serverTransition && isLoggedIn()) {
-            updateLoginState(MapleClient.LOGIN_NOTLOGGEDIN, getSessionIPAddress());
+        try {
+          if ((chz == -1) || (ch == null) || (clone) || (ch.isShutdown())) { this.player = null;
+            return;
+          }
+          if (messengerid > 0) {
+            World.Messenger.leaveMessenger(messengerid, chrm);
+          }
+          if (party != null) {
+            chrp.setOnline(false);
+            World.Party.updateParty(party.getId(), PartyOperation.LOG_ONOFF, chrp);
+            if ((map != null) && (party.getLeader().getId() == idz)) {
+              MaplePartyCharacter lchr = null;
+              for (MaplePartyCharacter pchr : party.getMembers()) {
+                if ((pchr != null) && (map.getCharacterById(pchr.getId()) != null) && ((lchr == null) || (lchr.getLevel() < pchr.getLevel()))) {
+                  lchr = pchr;
+                }
+              }
+              if (lchr != null) {
+                World.Party.updateParty(party.getId(), PartyOperation.CHANGE_LEADER_DC, lchr);
+              }
+            }
+          }
+          if (bl != null) {
+            if (!this.serverTransition)
+              World.Buddy.loggedOff(namez, idz, this.channel, bl.getBuddyIds());
+            else {
+              World.Buddy.loggedOn(namez, idz, this.channel, bl.getBuddyIds());
+            }
+          }
+          if ((gid > 0) && (chrg != null)) {
+            World.Guild.setGuildMemberOnline(chrg, false, -1);
+          }
+          if ((fid > 0) && (chrf != null))
+            World.Family.setFamilyMemberOnline(chrf, false, -1);
         }
-        engines.clear();
+        catch (Exception e) {
+          e.printStackTrace();
+          FileoutputUtil.outputFileError("Log_AccountStuck.rtf", e);
+          System.err.println(new StringBuilder().append(getLogMessage(this, "ERROR")).append(e).toString());
+        } finally {
+          if ((RemoveInChannelServer) && (ch != null)) {
+            ch.removePlayer(idz, namez);
+          }
+          this.player = null;
+        }
+      } else {
+        int ch = World.Find.findChannel(idz);
+        if (ch > 0) {
+          disconnect(RemoveInChannelServer, false);
+          return;
+        }
+        try {
+          if (party != null) {
+            chrp.setOnline(false);
+            World.Party.updateParty(party.getId(), PartyOperation.LOG_ONOFF, chrp);
+          }
+          if (!this.serverTransition)
+            World.Buddy.loggedOff(namez, idz, this.channel, bl.getBuddyIds());
+          else {
+            World.Buddy.loggedOn(namez, idz, this.channel, bl.getBuddyIds());
+          }
+          if ((gid > 0) && (chrg != null)) {
+            World.Guild.setGuildMemberOnline(chrg, false, -1);
+          }
+          if ((fid > 0) && (chrf != null)) {
+            World.Family.setFamilyMemberOnline(chrf, false, -1);
+          }
+          if (this.player != null)
+            this.player.setMessenger(null);
+        }
+        catch (Exception e) {
+          e.printStackTrace();
+          FileoutputUtil.outputFileError("Log_AccountStuck.rtf", e);
+          System.err.println(new StringBuilder().append(getLogMessage(this, "ERROR")).append(e).toString());
+        } finally {
+          if ((RemoveInChannelServer) && (ch > 0)) {
+            CashShopServer.getPlayerStorage().deregisterPlayer(idz, namez);
+          }
+          this.player = null;
+        }
+      }
     }
+    if ((!this.serverTransition) && (isLoggedIn())) {
+      updateLoginState(0, getSessionIPAddress());
+    }
+    this.engines.clear();
+  }
 
     public final String getSessionIPAddress() {
         return session.getRemoteAddress().toString().split(":")[0];

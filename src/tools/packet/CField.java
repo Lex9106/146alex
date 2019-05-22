@@ -926,8 +926,7 @@ public class CField {
 
     public static byte[] spawnPlayerMapobject(MapleCharacter chr) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
-        MapleQuestStatus stat = chr.getQuestNoAdd(MapleQuest.getInstance(124000));
-        mplew.writeInt(stat != null && stat.getCustomData() != null ? Integer.parseInt(stat.getCustomData()) : 0); //title
+
         mplew.writeShort(SendPacketOpcode.SPAWN_PLAYER.getValue());
         mplew.writeInt(chr.getId());
         mplew.write(chr.getLevel());
@@ -965,11 +964,6 @@ public class CField {
         mask[5] |= 0x8000;
         if ((chr.getBuffedValue(MapleBuffStat.DARKSIGHT) != null) || (chr.isHidden())) {
             mask[MapleBuffStat.DARKSIGHT.getPosition(true)] |= MapleBuffStat.DARKSIGHT.getValue();
-        }
-        if (chr.getBuffedValue(MapleBuffStat.DARK_METAMORPHOSIS) != null) {
-            mask[MapleBuffStat.DARK_METAMORPHOSIS.getPosition(true)] |= MapleBuffStat.DARK_METAMORPHOSIS.getValue();
-            buffvalue.add(new Pair(Integer.valueOf(chr.getBuffedValue(MapleBuffStat.DARK_METAMORPHOSIS).intValue()), Integer.valueOf(2)));
-            buffvalue.add(new Pair(Integer.valueOf(chr.getBuffSource(MapleBuffStat.DARK_METAMORPHOSIS)), Integer.valueOf(3)));
         }
         if (chr.getBuffedValue(MapleBuffStat.SOULARROW) != null) {
             mask[MapleBuffStat.SOULARROW.getPosition(true)] |= MapleBuffStat.SOULARROW.getValue();
@@ -1171,6 +1165,8 @@ public class CField {
         mplew.writeInt(0);
         mplew.writeInt(0);
         mplew.writeInt(0);
+        MapleQuestStatus stat = chr.getQuestNoAdd(MapleQuest.getInstance(124000));
+        mplew.writeInt(stat != null && stat.getCustomData() != null ? Integer.parseInt(stat.getCustomData()) : 0); //title
         mplew.writeInt(0);
         mplew.writeInt(0);
         mplew.writeInt(0);//head title? chr.getHeadTitle()
@@ -1236,7 +1232,7 @@ public class CField {
         mplew.write(0);
         mplew.writeInt(0);
         mplew.writeInt(0); //v145
-        chr.getStat().recalcLocalStats(chr);
+
         return mplew.getPacket();
     }
 
@@ -4802,4 +4798,14 @@ public static byte[] showAndroidEmotion(int cid, byte emo1) {
 
         return mplew.getPacket(); 
     }  
+    
+    public static byte[] getGameMessage(final int code, final String msg) {
+        MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
+
+        mplew.writeShort(SendPacketOpcode.GAME_MESSAGE.getValue());
+        mplew.writeShort(code);
+        mplew.writeMapleAsciiString(msg);
+
+        return mplew.getPacket();
+    }
 }

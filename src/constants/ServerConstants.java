@@ -7,7 +7,7 @@ public class ServerConstants {
 
     public static boolean TESPIA = false; // Used for activating GMST.
     public static String SQL_PORT = "3306",
-            SQL_DATABASE = "Crimsonstoryv144",
+            SQL_DATABASE = "elision1",
             SQL_USER = "root",
             SQL_PASSWORD = "alex";
 
