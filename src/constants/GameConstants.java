@@ -2588,6 +2588,12 @@ case 24121005:
             case 21110007:
             case 21110008:
                 return 21110002;
+            case 21120005:  
+                 return 21121013;
+            case 21100002:
+                return 21101011;
+            case 21110003:
+                return 21111013;
             case 21000006:
                     return 21000002;
             case 31121010:
