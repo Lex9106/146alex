@@ -3736,7 +3736,7 @@ public class MapleCharacter extends AnimatedMapleMapObject implements Serializab
                 }
                 makeHaku();
             }
-            checkForceShield();
+            //checkForceShield();
         } catch (Exception e) {
            // FileoutputUtil.outputFileError(FileoutputUtil.ScriptEx_Log, e); //all jobs throw errors :(
         }
@@ -6135,16 +6135,50 @@ public class MapleCharacter extends AnimatedMapleMapObject implements Serializab
     @Override
     public void sendSpawnData(MapleClient client) {
         if (client.getPlayer().allowedToTarget(this)) {
-        if (hasEquipped(1142322) || hasEquipped(1142323) || hasEquipped(1142324) || hasEquipped(1142325) || hasEquipped(1142326)) {
+            //if (client.getPlayer() != this)
+            client.getSession().write(CField.spawnPlayerMapobject(this));
+
+            for (final MaplePet pet : pets) {
+                if (pet.getSummoned()) {
+                    client.getSession().write(PetPacket.showPet(this, pet, false, false));
+                }
+            }
+            for (final WeakReference<MapleCharacter> chr : clones) {
+                if (chr.get() != null) {
+                    chr.get().sendSpawnData(client);
+                }
+            }
+            if (dragon != null) {
+                client.getSession().write(CField.spawnDragon(dragon));
+            }
+            if (haku != null) {
+                client.getSession().write(CField.spawnHaku(haku));
+            }
+            if (android != null) {
+                client.getSession().write(CField.spawnAndroid(this, android));
+            }
+            if (summonedFamiliar != null) {
+                client.getSession().write(CField.spawnFamiliar(summonedFamiliar, true, true));
+            }
+            if (summons != null && summons.size() > 0) {
+                summonsLock.readLock().lock();
+                try {
+                    for (final MapleSummon summon : summons) {
+                        client.getSession().write(SummonPacket.spawnSummon(summon, false));
+                    }
+                } finally {
+                    summonsLock.readLock().unlock();
+                }
+            }
+            if (followid > 0 && followon) {
+                client.getSession().write(CField.followEffect(followinitiator ? followid : id, followinitiator ? id : followid, null));
+            }
+            ////////////////////////
+            if (hasEquipped(1142322) || hasEquipped(1142323) || hasEquipped(1142324) || hasEquipped(1142325) || hasEquipped(1142326)) {
         getMonsterBook().calculateScore(this);
         getStat().recalcLocalStats(this);
         } 
         getStat().relocHeal(this);
-            client.getSession().write(CField.spawnPlayerMapobject(this));
-            if (FamiliarIdLogin > 0 && summonedFamiliar == null) {
-                MobHandler.SpawnFamiliarChannel(FamiliarIdLogin, getClient(), this);
-                client.getSession().write(CField.spawnFamiliar(summonedFamiliar, true, true));
-            }
         if (getQuestStatus(7830) == 0) {
         getQuestNAdd(MapleQuest.getInstance(GameConstants.PENDANT_SLOT)).setCustomData(String.valueOf(System.currentTimeMillis() + ((long) 3650 * 24 * 60 * 60000)));
         forceStartQuest(7830, "1");
@@ -6198,18 +6232,8 @@ public class MapleCharacter extends AnimatedMapleMapObject implements Serializab
         if (!GameConstants.isGolluxMap(getMapId())) {
         GolluxTries = 0;   
         }
-            for (final MaplePet pet : pets) {
-                if (pet.getSummoned()) {
-                    client.getSession().write(PetPacket.showPet(this, pet, false, false));
-                    getStat().recalcLocalStats(this);
-                }
-            }
-            for (final WeakReference<MapleCharacter> chr : clones) {
-                if (chr.get() != null) {
-                    chr.get().sendSpawnData(client);
-                }
-            }
-            if (getMapId() != 240090800 && getMapId() != 240090801 && getMapId() != 141060000) {
+        }
+        if (getMapId() != 240090800 && getMapId() != 240090801 && getMapId() != 141060000) {
             dispelBuff(80001277);
             dispelBuff(80001298);
             }
@@ -6228,29 +6252,6 @@ public class MapleCharacter extends AnimatedMapleMapObject implements Serializab
             getMap().spawnMonsterOnGroundBelow(MapleLifeFactory.getMonster(9100044), new Point(235,60));
             getMap().spawnMonsterOnGroundBelow(MapleLifeFactory.getMonster(9100044), new Point(235,60));
             }
-            if (dragon != null) {
-                client.getSession().write(CField.spawnDragon(dragon));
-            }
-            if (haku != null) {
-                client.getSession().write(CField.spawnHaku(haku));
-            }
-            if (android != null) {
-                client.getSession().write(CField.spawnAndroid(this, android));
-            }
-            if (summons != null && summons.size() > 0) {
-                summonsLock.readLock().lock();
-                try {
-                    for (final MapleSummon summon : summons) {
-                        client.getSession().write(SummonPacket.spawnSummon(summon, false));
-                    }
-                } finally {
-                    summonsLock.readLock().unlock();
-                }
-            }
-            if (followid > 0 && followon) {
-                client.getSession().write(CField.followEffect(followinitiator ? followid : id, followinitiator ? id : followid, null));
-            }
-        }
     }
 
     public final void equipChanged() {
@@ -6894,10 +6895,6 @@ public class MapleCharacter extends AnimatedMapleMapObject implements Serializab
         this.rebuy = rebuy;
     }
 
-	public void dcolormsg(int color, String message) {
-		client.getSession().write(CField.getGameMessage(color, message));
-	}
-
     public static enum FameStatus {
 
         OK,
@@ -7024,7 +7021,7 @@ public class MapleCharacter extends AnimatedMapleMapObject implements Serializab
     this.map.broadcastMessage(this, CWvsContext.BuffPacket.giveForeignDebuff(this.id, disease, skillid, level, x), false);
     }
     
-    public void ApplyPoison(final boolean Cure) {
+    public void ApplyPoison(boolean Cure) {
      final long durationFinal = PoisonDuration;
             final AtomicInteger runCount = new AtomicInteger();
             final java.util.Timer DoTTimer = new java.util.Timer(); //Declaring a new timer here each time will force the previous timer to clean up automatically via GC;
@@ -9533,21 +9530,9 @@ if (Petid >= 5000281 && Petid <= 5000283 && Petid2 >= 5000281 && Petid2 <= 50002
         if (damage <= 0) {
             return ret;
         }
-        //Handled Client - Side
-        /*if (stats.ignoreDAMr > 0 && Randomizer.nextInt(100) < stats.ignoreDAMr_rate) {
-            damage -= Math.floor((stats.ignoreDAMr * damage) / 100.0f);
-            getClient().getSession().write(CField.EffectPacket.showForeignEffect(20));
-            if (isSuperGM()) {
-            dropMessage(5,"IgnoreDam value is " + stats.ignoreDAMr + " Rate " + stats.ignoreDAMr_rate + "%");
-            }
+        if (getBuffSource(MapleBuffStat.COMBO_DRAIN) == 21101005) {
+            healHP(((int) Math.min(this.getStat().getCurrentMaxHp(), Math.min(((int) ((double) damage * (double) getStatForBuff(MapleBuffStat.COMBO_DRAIN).getX() / 100.0)), stats.getCurrentMaxHp()/ 8))));
         }
-        if (stats.ignoreDAM > 0 && Randomizer.nextInt(100) < stats.ignoreDAM_rate) {
-            getClient().getSession().write(CField.EffectPacket.showForeignEffect(20));
-            damage -= stats.ignoreDAM;
-            if (isSuperGM()) {
-            dropMessage(5,"IgnoreDamR value is " + stats.ignoreDAM + " Rate " + stats.ignoreDAM_rate + "%");
-            }
-        }*/
         final Integer div = getBuffedValue(MapleBuffStat.DIVINE_SHIELD);
         final Integer div2 = getBuffedValue(MapleBuffStat.HOLY_MAGIC_SHELL);
         if (div2 != null) {
@@ -9772,9 +9757,6 @@ if (Petid >= 5000281 && Petid <= 5000283 && Petid2 >= 5000281 && Petid2 <= 50002
 
     public void onAttack(long maxhp, int maxmp, int skillid, int oid, int totDamage, int critCount) {
         if (stats.hpRecoverProp > 0) {
-            if (isSuperGM()) {
-            dropMessage(5,"hpRecoverProp is Assigned with " + stats.hpRecoverProp + " %" + " and " + stats.hpRecover + " Value");    
-            }
             if (Randomizer.nextInt(100) <= stats.hpRecoverProp) {//i think its out of 100, anyway
                 if (stats.hpRecover > 0) {
                     healHP(stats.hpRecover * stats.getCurrentMaxHp() / 100);
@@ -9802,9 +9784,9 @@ if (Petid >= 5000281 && Petid <= 5000283 && Petid2 >= 5000281 && Petid2 <= 50002
         if (getBuffedValue(MapleBuffStat.LEECH_AURA) != null) {
             addHP(((int) Math.min(maxhp, Math.min(((int) ((double) totDamage * (double) getStatForBuff(MapleBuffStat.LEECH_AURA).getX() / 100.0)), stats.getMaxHp() / 2))));
         }
-        if (getBuffSource(MapleBuffStat.COMBO_DRAIN) == 23101003) {
+        /*if (getBuffSource(MapleBuffStat.COMBO_DRAIN) == 23101003) {
             addMP(((int) Math.min(maxmp, Math.min(((int) ((double) totDamage * (double) getStatForBuff(MapleBuffStat.COMBO_DRAIN).getX() / 100.0)), stats.getMaxMp() / 2))));
-        }
+        }*/
         if (getBuffedValue(MapleBuffStat.REAPER) != null && getBuffedValue(MapleBuffStat.SUMMON) == null && getSummonsSize() < 4 && canSummon()) {
             final MapleStatEffect eff = getStatForBuff(MapleBuffStat.REAPER);
             if (eff.makeChanceResult()) {
