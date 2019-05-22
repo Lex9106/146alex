@@ -112,7 +112,7 @@ public class MapleSummon extends AnimatedMapleMapObject {
             case 3111002:
             case 3211002:
             case 3120012:
-            case 3221014:
+            //case 3221014:
             case 13120007:
             case 3220012:
             case 13111004:
@@ -235,7 +235,7 @@ public class MapleSummon extends AnimatedMapleMapObject {
                 return 3; //attacks what you attack
             case 35121009: //bots n. tots
             case 3121013: 
-            case 3221014:
+            //case 3221014:
                 return 5; //sub summons
             case 35121003:
                 return 6; //charge
