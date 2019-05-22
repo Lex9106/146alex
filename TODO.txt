@@ -37,13 +37,13 @@ Added Follow the Lead for all classes (Eunice)
 Gollux has been fully implemented. Added Sweetwater Craft.
 Donation Shop is fully revamped.
 Fixed...
-----------------------------
+-----------------------------------------------
 
 
 
 Roll of the Dice has been fixed and works properly.
 Infinity Blast has been fixed and works properly.
------------------
+-------------------------------------------------------------
 
 
 Corsair (Refixed).
@@ -102,3 +102,10 @@ Fixed an issue with 4th Job Skills not working properly with Equinox.
 Fixed an issue with Hyper (Active Skill). now it works properly.
 
 (Fixed Some other stuff but forgot what)?
+---------------------------------------------
+
+
+Fixed the issue with the Monster Cards .
+Added the Job Advancer to Eunice.
+Fixed Call of the wild and now it works properly.
+Fixed Infiltrate and now it works properly and doesn't cause dc.
