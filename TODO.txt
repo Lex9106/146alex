@@ -1,1 +1,97 @@
-1
+Update Log:
+Gollux has been fully implemented.
+Added Sweetwater Craft.
+Donation Shop is fully revamped.
+Fixed an issue with Ignite and now it works properly.
+Added new Chairs Inside the game.
+Mu Long Dojo has been fixed and have 7 different modes.
+Randolf has been updated.
+Gollux Scrolls has been fully fixed.
+(New Client and WZ Edits will be uploaded soon). 
+
+------------------
+
+The following updates will take place after this restart:
+1. Channels 5-8 monsters are now buffed HP/EXP and nx calculations are different on these channels.
+2. Added red cubes to lilin, decreased drastically red cube drop rate.
+
+-------------------------------
+
+Unlimited Combos has been fully fixed and now works properly.
+Final Toss has been fully fixed and now works properly.
+Final Blow has been fully fixed and now works properly.
+Heroic Memories has been fully fixed and now works properly.
+Combo Drain has been fully fixed and now works properly.
+Body Pressure has been fully fixed and now works properly
+Aran Class has been fully fixed.
+Teleport Mastery (I/L) has been fully fixed and now works properly.
+Teleport Mastery (F/P) has been fully fixed and now works properly.
+Teleport Mastery (Bishop) has been fully fixed and now works properly.
+Teleport Mastery (Evan) has been fully fixed and now works properly.
+Teleport Mastery (Battle Mage) has been fully fixed and now works properly.
+Overhelming Power has been fully fixed and now works properly.
+
+---------------------------------------
+
+Added Follow the Lead for all classes (Eunice)
+Gollux has been fully implemented. Added Sweetwater Craft.
+Donation Shop is fully revamped.
+Fixed...
+----------------------------
+
+
+
+Roll of the Dice has been fixed and works properly.
+Infinity Blast has been fixed and works properly.
+-----------------
+
+
+Corsair (Refixed).
+Roll of the Dice has been fixed and works properly.
+Infinity Blast has been fixed and works properly.
+
+Shadower:
+Critical Growth: has been fully fixed
+@beginner will give a dagger now
+
+Hayato
+Battoujutsu Stance: Correct buff is now casted
+Merciless Blade: has been fully fixed
+Warrior's Heart: has been fully fixed
+White Angelic Blessing buff is no longer activated when casting a certain Hayato skills
+
+Paladin
+Elemental Charge: Stacks properly now
+Blast: Blast buff is applied properly when Elemental Charge is stacked max
+
+Wild Hunter
+Jaguar Rampage: damage is now applied correctly
+
+Dawn Warrior
+Equinox: has been fully fixed
+------------------------
+
+Shadower:
+Prime Critical: has been fully fixed 
+
+Hayato:
+Hitokiri Strike: Cooldown is now working.
+
+Wind Archer:
+Albatross - has been fully fixed 
+Trifling Wind - now applies damage on mobs
+Touch of the Wind - has been fully fixed
+
+Bowmaster:
+Focused Fury - has been fully fixed.
+
+Angelic Buster:
+Affinity Heart IV - now applies when using Star Gazer
+Supreme Supernova - is working properly now
+
+Night Walker:
+Shadow Web: Continuous damage is now applies on the target
+Poison Bomb: Over time damage is now applies on the target
+
+Blaze Wizard:
+Flame Gear: Over Time damage now applies on target
