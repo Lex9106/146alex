@@ -687,11 +687,6 @@ public class MapleStatEffect implements Serializable {
                         case 1311015: // Cross Surge
                             ret.statups.put(MapleBuffStat.CROSS_SURGE, ret.info.get(MapleStatInfo.x));
                             break;
-                        case 21111009: //combo recharge
-                        case 1311006: //dragon roar
-                        case 1311005: //NOT A BUFF - Sacrifice
-                            ret.hpR = -ret.info.get(MapleStatInfo.x) / 100.0;
-                            break;
                         case 1211010: //NOT A BUFF - HP Recover
                             ret.hpR = ret.info.get(MapleStatInfo.x) / 100.0D;
                             break;
@@ -3370,6 +3365,11 @@ public class MapleStatEffect implements Serializable {
                 applyto.getMap().broadcastMessage(applyto, BuffPacket.giveForeignBuff(applyto.getId(), stat, this), false);
                 break;
             }*/
+            case 21111009: //combo recharge
+            case 1311006: //dragon roar
+            case 1311005: //NOT A BUFF - Sacrifice
+            applyto.addHP(-info.get(MapleStatInfo.x) * applyto.getStat().getCurrentMaxHp() / 100);
+            break;
             case 31121005: { // Dark Metamorphosis
                 if (applyto.isHidden()) {
                     break;
