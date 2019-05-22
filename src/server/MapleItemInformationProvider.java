@@ -1310,7 +1310,8 @@ public class MapleItemInformationProvider {
     }
 
     public final Equip randomizeStats(final Equip equip, MapleCharacter chr, final MapleClient c) {
-        if (Randomizer.nextInt(100) <= 95 && !chr.isSuperGM()) {
+        final MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
+        if (Randomizer.nextInt(100) <= 95 && !ii.isCash(equip.getItemId())) {
         equip.setStr(getRandStat(equip.getStr(), 5));
         equip.setDex(getRandStat(equip.getDex(), 5));
         equip.setInt(getRandStat(equip.getInt(), 5));
@@ -1329,8 +1330,7 @@ public class MapleItemInformationProvider {
         equip.setBossDamage(getRandStat(equip.getBossDamage(), 5));
         equip.setIgnorePDR(getRandStat(equip.getIgnorePDR(), 5));
         }
-        else {
-        final MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
+        else if (!ii.isCash(equip.getItemId())){
         final String msg = ii.getName(equip.getItemId());
         final int reqLevel = ii.getReqLevel(equip.getItemId());
         chr.dropMessage(-6, msg + " has been blessed with the power of Cygnus.");

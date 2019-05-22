@@ -534,8 +534,8 @@ public static MapleStatEffect c;
         monster.damage(player, monster.getMobMaxHp(), true, attack.skill);  
         player.addMP(MPRecovery);
         player.healHP(HPRecovery);//To show HP Gain on Screen
-        player.getClient().getSession().write(CField.EffectPacket.showOwnBuffEffect(13110009, 7, player.getLevel(), MapleStatEffect.level));
-        player.getMap().broadcastMessage(player, CField.EffectPacket.showBuffeffect(player.getId(), 13110009, 7, player.getLevel(), MapleStatEffect.level), false);
+        player.getClient().getSession().write(CField.EffectPacket.showOwnBuffEffect(13110009, 2, player.getLevel(), MapleStatEffect.level));
+        player.getMap().broadcastMessage(player, CField.EffectPacket.showBuffeffect(player.getId(), 13110009, 2, player.getLevel(), MapleStatEffect.level), false);
         }
         }
             if (totDamageToOneMonster >= 10000) {

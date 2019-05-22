@@ -1440,6 +1440,7 @@ public class MapleCharacter extends AnimatedMapleMapObject implements Serializab
             return;
         }
         if (dc) {//It needs to restart
+        getClient().getSession().close();
         resetRunningStack();
         FamiliarIdLogin = 0;
         InterServerHandler.tittleHPMP = 0;
@@ -4925,11 +4926,6 @@ public class MapleCharacter extends AnimatedMapleMapObject implements Serializab
         if (skill == null) {
             return 0;
         }
-        
-        if (GameConstants.iskaiser_Transfiguration_Skill(skill.getId())) {
-            return skill.getMaxLevel();
-        }
-        
         final SkillEntry ret = skills.get(skill);
         if (ret == null || ret.skillevel <= 0) {
             return 0;
@@ -6898,11 +6894,6 @@ public class MapleCharacter extends AnimatedMapleMapObject implements Serializab
         this.rebuy = rebuy;
     }
 
-	public void dcolormsg(int color, String message) {
-		client.getSession().write(CField.getGameMessage(color, message));
-	}
-        
-
     public static enum FameStatus {
 
         OK,
@@ -7029,7 +7020,7 @@ public class MapleCharacter extends AnimatedMapleMapObject implements Serializab
     this.map.broadcastMessage(this, CWvsContext.BuffPacket.giveForeignDebuff(this.id, disease, skillid, level, x), false);
     }
     
-    public void ApplyPoison(final boolean Cure) {
+    public void ApplyPoison(boolean Cure) {
      final long durationFinal = PoisonDuration;
             final AtomicInteger runCount = new AtomicInteger();
             final java.util.Timer DoTTimer = new java.util.Timer(); //Declaring a new timer here each time will force the previous timer to clean up automatically via GC;

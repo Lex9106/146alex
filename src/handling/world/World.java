@@ -1680,7 +1680,7 @@ public class World {
         }
     }
     private final static int CHANNELS_PER_THREAD = 3;
-    
+
     public static void registerRespawn() {
         Integer[] chs = ChannelServer.getAllInstance().toArray(new Integer[0]);
         for (int i = 0; i < chs.length; i += CHANNELS_PER_THREAD) {
@@ -1696,7 +1696,6 @@ public class World {
         private final List<ChannelServer> cservs = new ArrayList<>(CHANNELS_PER_THREAD);
 
         public Respawn(Integer[] chs, int c) {
-            System.out.print("Respawn \n");
             //StringBuilder s = new StringBuilder("Respawn Worker is registered for channels ");
             for (int i = 1; i <= CHANNELS_PER_THREAD && chs.length >= (c + i); i++) {
                 cservs.add(ChannelServer.getInstance(c + i));
@@ -1717,10 +1716,7 @@ public class World {
                     }
                 }
             }
-
         }
-
-        
     }
 
     public static void handleMap(final MapleMap map, final int numTimes, final int size, final long now) {

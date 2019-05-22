@@ -98,12 +98,12 @@ public class MapleInventoryManipulator {
         eq.setSocket1(0);
         }
         if (reqLevel >= 60 && !ii.isCash(eq.getItemId()) && eq.getUpgradeSlots() > 0 && !GameConstants.isMechanic(eq.getItemId()) && !GameConstants.isDragon(eq.getItemId())) {
-        if (Randomizer.nextInt(100) >= 85) {
+        if (Randomizer.nextInt(100) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
         eq.setSocket2(randomSkill);
         }
-        else if (Randomizer.nextInt(100) <= 3 || c.getPlayer().isSuperGM()) {
+        else if (Randomizer.nextInt(100) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
@@ -237,12 +237,12 @@ public class MapleInventoryManipulator {
         eq.setSocket1(0);
         }
         if (!ii.isCash(eq.getItemId()) && eq.getUpgradeSlots() > 0 && !GameConstants.isMechanic(eq.getItemId()) && !GameConstants.isDragon(eq.getItemId())) {
-        if (Randomizer.nextInt(100) >= 85) {
+        if (Randomizer.nextInt(100) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
         eq.setSocket2(randomSkill);
         }
-        else if (Randomizer.nextInt(100) <= 3 || c.getPlayer().isSuperGM()) {
+        else if (Randomizer.nextInt(250) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
@@ -254,18 +254,18 @@ public class MapleInventoryManipulator {
         }
         }
         if (eq.getUpgradeSlots() <= 0 || GameConstants.isMechanic(eq.getItemId()) || GameConstants.isDragon(eq.getItemId())) {
-        if (Randomizer.nextInt(100) >= 85) {
+        if (Randomizer.nextInt(100) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(randomSkill);
         }
-        else if (Randomizer.nextInt(100) >= 95) {
+        else if (Randomizer.nextInt(250) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(randomSkill);
         eq.setSocket2(randomSkill2);  
         c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
         }
-        else if (Randomizer.nextInt(100) >= 99 || c.getPlayer().isSuperGM()) {
+        else if (Randomizer.nextInt(500) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill3 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];   
@@ -541,12 +541,12 @@ public class MapleInventoryManipulator {
         eq.setSocket1(0);
         }
         if (reqLevel >= 60 && !ii.isCash(eq.getItemId()) && eq.getUpgradeSlots() > 0 && !GameConstants.isMechanic(eq.getItemId()) && !GameConstants.isDragon(eq.getItemId())) {
-        if (Randomizer.nextInt(100) >= 85) {
+        if (Randomizer.nextInt(100) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
         eq.setSocket2(randomSkill);
         }
-        else if (Randomizer.nextInt(100) <= 3 || c.getPlayer().isSuperGM()) {
+        else if (Randomizer.nextInt(250) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
@@ -764,10 +764,10 @@ public class MapleInventoryManipulator {
         if (reqLevel >= 60 && !ii.isCash(eq.getItemId()) && eq.getUpgradeSlots() > 0 && !GameConstants.isMechanic(eq.getItemId()) && !GameConstants.isDragon(eq.getItemId())) {
         eq.setSocket1(0);
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite(100,eq.getItemId()).length)];
-        if (Randomizer.nextInt(100) >= 85) {
+        if (Randomizer.nextInt(100) == 1) {
         eq.setSocket2(randomSkill);
         }
-        else if (Randomizer.nextInt(100) <= 3 || c.getPlayer().isSuperGM()) {
+        else if (Randomizer.nextInt(250) == 1) {
         eq.setSocket2(randomSkill);
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite(100,eq.getItemId()).length)];
         eq.setSocket3(randomSkill2);
@@ -958,12 +958,12 @@ public class MapleInventoryManipulator {
         eq.setSocket1(0);
         }
         if (reqLevel >= 60 && !ii.isCash(eq.getItemId()) && eq.getUpgradeSlots() > 0 && !GameConstants.isMechanic(eq.getItemId()) && !GameConstants.isDragon(eq.getItemId())) {
-        if (Randomizer.nextInt(100) >= 75) {
+        if (Randomizer.nextInt(100) <= 5) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
         eq.setSocket2(randomSkill);
         }
-        else if (Randomizer.nextInt(100) <= 5 || c.getPlayer().isSuperGM()) {
+        else if (Randomizer.nextInt(250)<= 5) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
@@ -1158,12 +1158,12 @@ public class MapleInventoryManipulator {
         eq.setSocket1(0);
         }
         if (reqLevel >= 60 && !ii.isCash(eq.getItemId()) && eq.getUpgradeSlots() > 0 && !GameConstants.isMechanic(eq.getItemId()) && !GameConstants.isDragon(eq.getItemId())) {
-        if (Randomizer.nextInt(100) >= 85) {
+        if (Randomizer.nextInt(100) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
         eq.setSocket2(randomSkill);
         }
-        else if (Randomizer.nextInt(100) <= 3 || c.getPlayer().isSuperGM()) {
+        else if (Randomizer.nextInt(250) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
@@ -1360,12 +1360,12 @@ public class MapleInventoryManipulator {
         eq.setSocket1(0);
         }
         if (!ii.isCash(eq.getItemId()) && eq.getUpgradeSlots() > 0 && !GameConstants.isMechanic(eq.getItemId()) && !GameConstants.isDragon(eq.getItemId())) {
-        if (Randomizer.nextInt(100) >= 85) {
+       if (Randomizer.nextInt(100) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
         eq.setSocket2(randomSkill);
         }
-        else if (Randomizer.nextInt(100) <= 3 || c.getPlayer().isSuperGM()) {
+        else if (Randomizer.nextInt(250) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
@@ -1377,18 +1377,18 @@ public class MapleInventoryManipulator {
         }
         }
         if (eq.getUpgradeSlots() <= 0 || GameConstants.isMechanic(eq.getItemId()) || GameConstants.isDragon(eq.getItemId())) {
-        if (Randomizer.nextInt(100) >= 85) {
+        if (Randomizer.nextInt(100) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(randomSkill);
         }
-        else if (Randomizer.nextInt(100) >= 95) {
+        else if (Randomizer.nextInt(250) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(randomSkill);
         eq.setSocket2(randomSkill2);
         c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
         }
-        else if (Randomizer.nextInt(100) >= 99 || c.getPlayer().isSuperGM()) {
+        else if (Randomizer.nextInt(500) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill3 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];   

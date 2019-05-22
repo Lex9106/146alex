@@ -22,19 +22,19 @@ public class JobConstants {
         Evan(4, JobFlag.ENABLED),
         Mercedes(5, JobFlag.ENABLED),
         Demon(6, JobFlag.ENABLED),
-        Phantom(7, JobFlag.DISABLED),
+        Phantom(7, JobFlag.ENABLED),
         DualBlade(8, JobFlag.ENABLED),
-        Mihile(9, JobFlag.DISABLED),
+        Mihile(9, JobFlag.ENABLED),
         Luminous(10, JobFlag.ENABLED),
-        Kaiser(11, JobFlag.DISABLED),
-        AngelicBuster(12, JobFlag.DISABLED),
-        Cannoneer(13, JobFlag.DISABLED),
-        Xenon(14, JobFlag.DISABLED),
-        Zero(15, JobFlag.DISABLED),
-        Jett(16, JobFlag.DISABLED),
-        Hayato(17, JobFlag.DISABLED),
-        Kanna(18, JobFlag.DISABLED),
-        Beastamer(19, JobFlag.DISABLED);
+        Kaiser(11, JobFlag.ENABLED),
+        AngelicBuster(12, JobFlag.ENABLED),
+        Cannoneer(13, JobFlag.ENABLED),
+        Xenon(14, JobFlag.ENABLED),
+        Zero(15, JobFlag.ENABLED),
+        Jett(16, JobFlag.ENABLED),
+        Hayato(17, JobFlag.ENABLED),
+        Kanna(18, JobFlag.ENABLED),
+        Beastamer(19, JobFlag.ENABLED);
         private final int jobType, flag;
 
         private LoginJob(int jobType, JobFlag flag) {

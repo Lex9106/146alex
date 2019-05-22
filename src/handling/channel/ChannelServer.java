@@ -555,6 +555,4 @@ public class ChannelServer {
             chr.dropMessage(5, "Bomberman Event is not active.");
         }
     }
-    
-
 }
