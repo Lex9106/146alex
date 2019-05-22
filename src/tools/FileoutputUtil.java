@@ -29,7 +29,7 @@ import java.util.TimeZone;
 public class FileoutputUtil {
 
     // Logging output file
-   /* public static final String Acc_Stuck = "Log_AccountStuck.rtf",
+    public static final String Acc_Stuck = "Log_AccountStuck.rtf",
             Login_Error = "Log_Login_Error.rtf",
             // IP_Log = "Log_AccountIP.rtf",
             //GMCommand_Log = "Log_GMCommand.rtf",
@@ -41,7 +41,7 @@ public class FileoutputUtil {
             Hacker_Log = "Log_Hacker.rtf",
             Movement_Log = "Log_Movement.txt",
             CommandEx_Log = "Log_Command_Except.txt" //PQ_Log = "Log_PQ.rtf"
-            ;*/
+            ;
     // End
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private static final SimpleDateFormat sdfGMT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
