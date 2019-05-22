@@ -95,3 +95,10 @@ Poison Bomb: Over time damage is now applies on the target
 
 Blaze Wizard:
 Flame Gear: Over Time damage now applies on target
+
+Dawn Warrior:
+Fixed an issue with Call of Cygnus now it works properly.
+Fixed an issue with 4th Job Skills not working properly with Equinox.
+Fixed an issue with Hyper (Active Skill). now it works properly.
+
+(Fixed Some other stuff but forgot what)?
