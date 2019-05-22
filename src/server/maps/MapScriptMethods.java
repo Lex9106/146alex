@@ -1,22 +1,22 @@
 /*
- This file is part of the OdinMS Maple Story Server
- Copyright (C) 2008 ~ 2010 Patrick Huy <patrick.huy@frz.cc> 
- Matthias Butz <matze@odinms.de>
- Jan Christian Meyer <vimes@odinms.de>
+ 
+ 
+ 
+ 
 
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU Affero General Public License version 3
- as published by the Free Software Foundation. You may not use, modify
- or distribute this program under any other version of the
- GNU Affero General Public License.
+ 
+ 
+ 
+ 
+ 
 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU Affero General Public License for more details.
+ 
+ 
+ 
+ 
 
- You should have received a copy of the GNU Affero General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ 
+ 
  */
 package server.maps;
 
@@ -28,6 +28,7 @@ import client.SkillEntry;
 import client.SkillFactory;
 import constants.GameConstants;
 import java.awt.Point;
+import static java.lang.Thread.sleep;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
@@ -172,6 +173,7 @@ public class MapScriptMethods {
         Advanture_tuto33,
         Ranmaru_ExitCheck,
         root_camera,
+        root_secret,
         root_ereb00,
         enter_101072002,
         enter_101073300,
@@ -345,6 +347,7 @@ public class MapScriptMethods {
         ds_tuto_4_0,
         ds_tuto_5_0,
         ds_tuto_2_prep,
+        enter_23210,
         ds_tuto_1_before,
         ds_tuto_2_before,
         enter_edelstein,
@@ -468,24 +471,22 @@ public class MapScriptMethods {
                 c.getPlayer().getMap().startMapEffect("Vanquish those ghosts and find the letter.", 5120079);
                 break;
             case PinkZakumEnt:
-              //  c.getPlayer().getMap().startEventTimer(6000000);
+            {
+   //             c.getPlayer().getMap().startEventTimer(6000000);
             //    c.getPlayer().getMap().resetFully();
                 final EventManager eeem = c.getChannelServer().getEventSM().getEventManager("PinkZakumEntrance");
                 final EventInstanceManager eim = eeem.getInstance(("PinkZakumEntrance"));
              //   eim.unregisterPlayer(c.getPlayer());
-                eim.registerPlayer(c.getPlayer());
+             //   eim.registerPlayer(c.getPlayer());
                 eim.startEventTimer(45000);
                 c.getPlayer().getMap().startMapEffect("Work together and defeat Pink Zakum!.", 5120039);
                 break;
+            }
             case boss_Event_PinkZakum:
+                c.getPlayer().getMap().resetFully();
                 c.getPlayer().getMap().startMapEffect("DO NOT BE ALARMED! The Pink Zakum clone was just to help adventurers like you relieve stress!", 5120039);
-                EventTimer.getInstance().schedule(new Runnable() {
-                    @Override
-                    public void run() {
                   c.getPlayer().getMap().spawnPinkZakum(-10, 329);
                   c.getPlayer().getMap().broadcastMessage(CField.musicChange("Bgm10.img/Eregos"));
-                    }
-                }, 10000);
                 break;
             case dojang_Eff: {
                 if (c.getPlayer().getMapId() == 925020100 || c.getPlayer().getMapId() == 925030100 || c.getPlayer().getMapId() == 925040100) {
@@ -521,42 +522,32 @@ public class MapScriptMethods {
                     break;
                 }
             }
-            case pierre_Summon: { 
-                if (c.getPlayer().getMap().getMobsSize() == 0) { 
-                    c.getPlayer().getMap().spawnMonsterOnGroundBelow(MapleLifeFactory.getMonster(8900100), new Point(497, 551)); 
-                    c.getPlayer().getMap().startMapEffect("From the bottom of my heart, welcome to the tea party!", 5120098); 
-                    c.getSession().write(CField.showEffect("rootabyss/firework")); 
-                    c.getSession().write(CField.playSound("rootabyss/firework")); 
-                    break; 
-                } 
-            } 
-            case pierre_Summon1: { 
-                if (c.getPlayer().getMap().getMobsSize() == 0) { 
-                    c.getPlayer().getMap().spawnMonsterOnGroundBelow(MapleLifeFactory.getMonster(8900000), new Point(497, 551)); 
-                    c.getPlayer().getMap().startMapEffect("From the bottom of my heart, welcome to the tea party!", 5120098); 
-                    c.getSession().write(CField.showEffect("rootabyss/firework")); 
-                    c.getSession().write(CField.playSound("rootabyss/firework")); 
-                    break; 
-                } 
-            }             
-            case queen_summon0: { 
-                if (c.getPlayer().getMap().getMobsSize() == 0) { 
-                      c.getPlayer().getMap().startMapEffect("Attempt to wake the Crimson Queen", 5120107); 
-                    break; 
-                } 
-            } 
-            case abysscave_ent: { 
-                if (c.getPlayer().getMap().getMobsSize() == 0) { 
-                    c.getPlayer().getMap().startMapEffect("Vellum is nowhere to be seen. Take a look around the altar", 5120107); 
-                    break; 
-                } 
-            } 
-            case banban_Summon: { 
-                if (c.getPlayer().getMap().getMobsSize() == 0) { 
-                    c.getPlayer().getMap().startMapEffect("Summon Von Bon in the Dimensional Schism", 5120107); 
-                    break; 
-                } 
-            }  
+            case pierre_Summon: {
+                if (c.getPlayer().getMap().getMobsSize() == 0) {
+                    c.getPlayer().getMap().spawnMonsterOnGroundBelow(MapleLifeFactory.getMonster(8900000), new Point(497, 551));
+                    c.getPlayer().getMap().startMapEffect("From the bottom of my heart, welcome to the tea party!", 5120098);
+                    c.getSession().write(CField.showEffect("rootabyss/firework"));
+                    c.getSession().write(CField.playSound("rootabyss/firework"));
+                    break;
+                }
+            }
+            case pierre_Summon1: {
+                if (c.getPlayer().getMap().getMobsSize() == 0) {
+                    c.getPlayer().getMap().spawnMonsterOnGroundBelow(MapleLifeFactory.getMonster(8900000), new Point(497, 551));
+                    c.getPlayer().getMap().startMapEffect("From the bottom of my heart, welcome to the tea party!", 5120098);
+                    c.getSession().write(CField.showEffect("rootabyss/firework"));
+                    c.getSession().write(CField.playSound("rootabyss/firework"));
+                    break;
+                }
+            }            
+            case queen_summon0: {
+                //c.getPlayer().getMap().resetFully();
+                if (c.getPlayer().getMap().getMobsSize() == 0) {
+                      c.getPlayer().getMap().startMapEffect("Attempt to wake the Crimson Queen", 5120107);
+             //       c.getPlayer().getMap().spawnMonsterOnGroundBelow(MapleLifeFactory.getMonster(8920000), new Point(4, 135));
+                    break;
+                }
+            }
             
             case sao_enterF01: {
                  //   c.getSession().write(CField.showEffect("Sao/Start1"));
@@ -727,6 +718,22 @@ public class MapScriptMethods {
                                     theMob.setOverrideStats(oms);
                                     c.getPlayer().getMap().spawnMonsterOnGroundBelow(theMob, new Point(-12, 336));             
                  break;
+            }
+            case abysscave_ent: {
+                //c.getPlayer().getMap().resetFully();
+                if (c.getPlayer().getMap().getMobsSize() == 0) {
+                    c.getPlayer().getMap().startMapEffect("Vellum is nowhere to be seen. Take a look around the altar", 5120107);
+               //     c.getPlayer().getMap().spawnMonsterOnGroundBelow(MapleLifeFactory.getMonster(8930000), new Point(256, 443));
+                    break;
+                }
+            }
+            case banban_Summon: {
+                //c.getPlayer().getMap().resetFully();
+                if (c.getPlayer().getMap().getMobsSize() == 0) {
+                    c.getPlayer().getMap().startMapEffect("Summon Von Bon in the Dimensional Schism", 5120107);
+            //        c.getPlayer().getMap().spawnMonsterOnGroundBelow(MapleLifeFactory.getMonster(8910000), new Point(256, 443));
+                    break;
+                }
             }
             case StageMsg_goddess: {
                 switch (c.getPlayer().getMapId()) {
@@ -1218,7 +1225,7 @@ public class MapScriptMethods {
                 break;
             }
             default: {
-                //System.out.println("Unhandled script : " + scriptName + ", type : onFirstUserEnter - MAPID " + c.getPlayer().getMapId());
+                System.out.println("Unhandled script : " + scriptName + ", type : onFirstUserEnter - MAPID " + c.getPlayer().getMapId());
                 //FileoutputUtil.log(FileoutputUtil.ScriptEx_Log, "Unhandled script : " + scriptName + ", type : onFirstUserEnter - MAPID " + c.getPlayer().getMapId());
                 break;
             }
@@ -1768,12 +1775,20 @@ public class MapScriptMethods {
                 if (c.getPlayer().getQuestStatus(30000) == 1) {
                     NPCScriptManager.getInstance().dispose(c);
                     c.removeClickedNPC();
-                    NPCScriptManager.getInstance().start(c, 1064026, "AbyssTut01");
                     break;
                 }
             }
+            
+            case root_secret: {
+                c.getSession().write(CField.UIPacket.IntroEnableUI(1));
+                c.getSession().write(CField.UIPacket.IntroDisableUI(true));
+                c.getSession().write(CField.UIPacket.moveScreen(800));
+                NPCScriptManager.getInstance().start(c, 1064000, null);
+                break;
+            }
 
-            case root_ereb00: {
+       /*     case root_ereb00: {
+                if (c.getPlayer().getQuestStatus(30000) == 1) {
                 c.getSession().write(CField.UIPacket.IntroEnableUI(1));
                 c.getSession().write(CField.UIPacket.IntroDisableUI(true));
                 if (!c.getPlayer().getMap().containsNPC(1064026)) {
@@ -1782,8 +1797,11 @@ public class MapScriptMethods {
                 NPCScriptManager.getInstance().dispose(c);
                 c.removeClickedNPC();
                 NPCScriptManager.getInstance().start(c, 1064026, "AbyssTut00");
+                c.getPlayer().getMap().removeNpc(1064026);
+                }
                 break;
-            }
+            }*/
+                
 
             case enter_101072002: {
                 c.getPlayer().getMap().resetFully();
@@ -2051,9 +2069,9 @@ public class MapScriptMethods {
                     }
                 } else if (c.getPlayer().getMapId() >= 922010401 && c.getPlayer().getMapId() <= 922010405) {
                     if (c.getPlayer().getMap().getAllMonstersThreadsafe().size() > 0) {
-                        c.getPlayer().dropMessage(-1, "There are still some monsters remaining in this map.");
+                        c.getPlayer().dropMessage(-1, "V°n cÆn mØt sÑ quái v±t trong b¡n «Ó này.");
                     } else {
-                        c.getPlayer().dropMessage(-1, "There are no monsters remaining in this map.");
+                        c.getPlayer().dropMessage(-1, "Không cÆn quái v±t nào trong b¡n «Ó này.");
                     }
                 }
                 break;
@@ -2073,7 +2091,7 @@ public class MapScriptMethods {
             case check_q20833:
                 if (c.getPlayer().getQuestStatus(20833) == 1) {
                     MapleQuest.getInstance(20833).forceComplete(c.getPlayer(), 0);
-                    c.getSession().write(CWvsContext.getTopMsg("Who's that on the right of the map?"));
+                    c.getSession().write(CWvsContext.getTopMsg("Ai có quy¹n trên b¡n «Ó??"));
                 }
                 break;
             case q2614M:
@@ -2583,28 +2601,16 @@ public class MapScriptMethods {
                 } catch (InterruptedException ex) {
                 }
                 NPCScriptManager.getInstance().dispose(c);
-                c.removeClickedNPC();
-                NPCScriptManager.getInstance().start(c, 9270083, "np_tuto_0_1");
+                    c.removeClickedNPC();
+                    NPCScriptManager.getInstance().start(c, 9270083, "np_tuto_0_1");
                 break;
-            }
-                        case lightning_tuto_1_0: {
-       //        try {
-              //  c.getSession().write(CField.UIPacket.getDirectionStatus(false));
+                }
+                case lightning_tuto_1_0: {
                 c.getSession().write(CField.UIPacket.IntroEnableUI(1));
                 c.getSession().write(CField.UIPacket.IntroDisableUI(true));
-          //      Thread.sleep(2000L);
                   NPCScriptManager.getInstance().start(c, 2159353, "Lumi_tut1");
-          //      c.getSession().write(CField.UIPacket.IntroDisableUI(true));
-          //      c.getSession().write(CField.UIPacket.getDirectionInfo(1, 8000));
-          //      c.getSession().write(CField.UIPacket.getDirectionInfo(1, 8000));
-          //      c.getSession().write(CField.UIPacket.getDirectionInfo(3, 1));
-          //      Thread.sleep(2000L);
-          //      NPCScriptManager.getInstance().dispose(c);
-      ////             } catch (InterruptedException ex) {
-      //          }
                 c.removeClickedNPC();
                  c.getSession().write(CField.UIPacket.IntroEnableUI(0));
-           //     NPCScriptManager.getInstance().start(c, 2159353, "Lumi_tut1");
                 break;
             }
             case map_913070000: {
@@ -2823,14 +2829,10 @@ public class MapScriptMethods {
             }
             case PTtutor500: {
                 c.getSession().write(CField.UIPacket.IntroEnableUI(1));
-                try {
-                    c.getSession().write(CField.MapEff("phantom/mapname3"));
-                    Thread.sleep(3000);
-                } catch (InterruptedException ex) {
-                }
-                NPCScriptManager.getInstance().dispose(c);
+                c.getSession().write(CField.UIPacket.IntroDisableUI(true));
+                  NPCScriptManager.getInstance().start(c, 1402100, "PTtutor500");
                 c.removeClickedNPC();
-                NPCScriptManager.getInstance().start(c, 1402100, "PTtutor500_0");
+                 c.getSession().write(CField.UIPacket.IntroEnableUI(0));
                 break;
             }
             case PTjob1: {
@@ -2970,7 +2972,7 @@ public class MapScriptMethods {
                         timeOut += 100;
                     }
                 } else {
-                    c.getPlayer().dropMessage(5, "Or move out and proof your strength!");
+                    c.getPlayer().dropMessage(5, "Ho¶c di chuyºn ra ngoài và chñng minh sñc m¢nh cça b¢n!");
                 }
                 break;
             }
@@ -2979,7 +2981,7 @@ public class MapScriptMethods {
                 if (c.getPlayer().getQuestStatus(25120) == 1) {// && c.getPlayer().getQuestStatus(25101)!=1 && c.getPlayer().getQuestStatus(25101)!=2)
                     MapleQuest.getInstance(25120).forceComplete(c.getPlayer(), 0);
                 } else {
-                    c.getPlayer().dropMessage(5, "Or move out and proof your strength!");
+                    c.getPlayer().dropMessage(5, "Ho¶c di chuyºn ra ngoài và chñng minh sñc m¢nh cça b¢n!");
                 }
                 break;
             }
@@ -2994,7 +2996,7 @@ public class MapScriptMethods {
                     //c.getPlayer().forceCompleteQuest(29970);
                     //NPCScriptManager.getInstance().start(c, 1403002);
                 } else {
-                    c.getPlayer().dropMessage(5, "Or move out and proof your strength!");
+                    c.getPlayer().dropMessage(5, "Ho¶c di chuyºn ra ngoài và chñng minh sñc m¢nh cça b¢n!");
                 }
                 break;
             }
@@ -3067,7 +3069,7 @@ public class MapScriptMethods {
                         }
                     }, 9000);
                 } else {
-                    c.getPlayer().dropMessage(5, "Or move out, and proof your strength!");
+                    c.getPlayer().dropMessage(5, "Ho¶c di chuyºn ra ngoài và chñng minh sñc m¢nh cça b¢n!");
                 }
                 break;
             }
@@ -3079,7 +3081,7 @@ public class MapScriptMethods {
                 } catch (InterruptedException e) {
                 }
                 c.getPlayer().getMap().resetFully();
-                c.getPlayer().dropMessage(-1, "Father, There they are. All located in the planets!");
+                c.getPlayer().dropMessage(-1, "Cha, hÎ «ây rÓi. T¬t c¡ «¹u n¥m trong các hành tinh!");
                 if (!c.getPlayer().getMap().containsNPC(9270084)) {
                     c.getPlayer().getMap().spawnNpc(9270084, new Point(-103, 55));
                 }
@@ -3216,7 +3218,7 @@ public class MapScriptMethods {
                 c.getSession().write(UIPacket.IntroEnableUI(1));
                 c.getSession().write(UIPacket.getDirectionStatus(true));
                 c.getSession().write(UIPacket.getDirectionInfo(3, 0));
-                c.getSession().write(UIPacket.getDirectionInfo(4, 2159314));
+                //c.getSession().write(UIPacket.getDirectionInfo(4, 2159314));
                 NPCScriptManager.getInstance().dispose(c);
                 NPCScriptManager.getInstance().start(c, 2159314, null);
                 break;
@@ -3366,6 +3368,18 @@ public class MapScriptMethods {
                     break;
                 }
             }
+            case enter_23210: {
+                final MapleMap map = c.getPlayer().getMap();
+                map.resetFully();
+                if (c.getPlayer().getMap().getMobsSize() < 1){
+                    c.getPlayer().getMap().resetFully();
+                    //c.getPlayer().getMap().startMapEffect("Get rid of the Whipped Cream Wight.", 5120079);
+                    c.getPlayer().getMap().spawnMonsterOnGroundBelow(MapleLifeFactory.getMonster(9001036), new Point(625, -14));
+                    map.spawnNpc(2153006, new Point(625, -14));
+                }
+                break;
+            }
+            
             case goArcher: {
                 showIntro(c, "Effect/Direction3.img/archer/Scene" + (c.getPlayer().getGender() == 0 ? "0" : "1"));
                 break;
@@ -3545,7 +3559,7 @@ public class MapScriptMethods {
                 }
             }
             default: {
-                //System.out.println("Unhandled script : " + scriptName + ", type : onUserEnter - MAPID " + c.getPlayer().getMapId());
+                System.out.println("Unhandled script : " + scriptName + ", type : onUserEnter - MAPID " + c.getPlayer().getMapId());
                 //FileoutputUtil.log(FileoutputUtil.ScriptEx_Log, "Unhandled script : " + scriptName + ", type : onUserEnter - MAPID " + c.getPlayer().getMapId());
                 break;
             }

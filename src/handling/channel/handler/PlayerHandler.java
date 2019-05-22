@@ -502,7 +502,7 @@ public static int Invincibility = 0;
         }
     }
 
-    public static void TakeDamage(LittleEndianAccessor slea, MapleClient c, MapleCharacter chr) {
+    public static void TakeDamage(LittleEndianAccessor slea, final MapleClient c, MapleCharacter chr) {
         slea.skip(4);
         chr.updateTick(slea.readInt());
         byte type = slea.readByte();

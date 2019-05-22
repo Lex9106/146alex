@@ -4801,5 +4801,15 @@ public static byte[] showAndroidEmotion(int cid, byte emo1) {
         mplew.writeInt(1); 
 
         return mplew.getPacket(); 
+    }
+    
+    public static byte[] getGameMessage(final int code, final String msg) {
+        MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
+
+        mplew.writeShort(SendPacketOpcode.GAME_MESSAGE.getValue());
+        mplew.writeShort(code);
+        mplew.writeMapleAsciiString(msg);
+
+        return mplew.getPacket();
     }  
 }

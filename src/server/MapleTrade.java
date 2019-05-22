@@ -12,6 +12,7 @@ import java.lang.ref.WeakReference;
 import java.util.LinkedList;
 import java.util.List;
 import server.commands.CommandProcessor;
+import tools.LogHelper;
 import tools.packet.CField;
 import tools.packet.CWvsContext;
 import tools.packet.PlayerShopPacket;
@@ -271,6 +272,7 @@ public class MapleTrade {
             partner.getChr().setTrade(null);
             c.setTrade(null);
         }
+        LogHelper.logTrade(local, partner); // alpha
     }
 
     public static final void cancelTrade(MapleTrade Localtrade, MapleClient c, MapleCharacter chr) {
@@ -335,4 +337,14 @@ public class MapleTrade {
             c.setTrade(null);
         }
     }
+	public int getExchangeMesos(){
+            return exchangeMeso;
+	}
+        public List<Item> getItems() {
+            return new LinkedList<>(items);
+        }
+        
+        private int getMeso() {
+            return meso;
+        }
 }

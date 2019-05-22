@@ -705,7 +705,7 @@ public final class MapleMap {
             }
         }
         //Elite Monsters
-        Point Pos = monster.getTruePosition();
+        final Point Pos = monster.getTruePosition();
         short DifPlus = (short) (chr.getLevel() - monster.getStats().getLevel());
          short DifMin =  (short) (monster.getStats().getLevel() - chr.getLevel());
          int CharDifference = 0;

@@ -1,5 +1,6 @@
 package server;
 
+import client.MapleCharacter;
 import client.SkillFactory;
 import client.inventory.MapleInventoryIdentifier;
 import constants.GameConstants;
@@ -27,6 +28,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 import server.Timer.BuffTimer;
 import server.Timer.CloneTimer;
@@ -180,6 +182,12 @@ public class Start {
         long seconds = now / 1000;
         long ms = now % 1000;
         System.out.println("Total loading time: " + seconds + "s " + ms + "ms");
+        
+        
+        System.out.println("[/////////////////////////////////////////////////]");
+        System.out.println("Console Commands: ");
+        System.out.println("DcAll | prefixsay | shutdown | restart");
+        listenCommand();
     }
 
     public static class Shutdown implements Runnable {
@@ -190,8 +198,81 @@ public class Start {
             ShutdownServer.getInstance().run();
         }
     }
-
+    public static void listenCommand() {
+        try(Scanner sc = new Scanner(System.in)){
+    		String input;
+    	        input = sc.nextLine();
+    	        String command = input;
+    	        if (command.equalsIgnoreCase("say")) {
+                    
+                    
+    	            System.out.println("[console] Your message? write exit to go back to the menu");
+    	            input = sc.nextLine();
+    	            String message = input;
+    	            if(message.equalsIgnoreCase("exit")) {
+    	                restartlistener();
+    	            }
+    	            for(ChannelServer ch : ChannelServer.getAllInstances()) {
+    	                for(MapleCharacter chr : ch.getPlayerStorage().getAllCharacters()) {
+    	                    chr.dcolormsg(6, "[Console] " + message);
+    	                }
+    	            }
+    	            System.out.println("[Console] " + message);
+    	            restartlistener();
+    	        } else if (command.contains("dcall")) {
+                            for (ChannelServer cserv : ChannelServer.getAllInstances()) {
+                            cserv.getPlayerStorage().disconnectAll(true);
+				
+			}
+    	        }  else if (command.contains("shutdown")) {
+    	            Thread t = null;
+    	            if (t == null || !t.isAlive()) {
+    	                t = new Thread(ShutdownServer.getInstance());
+    	                ShutdownServer.getInstance().shutdown();
+    	                t.start();
+    	            }
+    	        } else if (command.contains("restart")) {
+    	            Thread t = null;
+    	            t = new Thread(ShutdownServer.getInstance());
+    	            ShutdownServer.getInstance().shutdown();
+    	            t.start();
+    	            EtcTimer.getInstance().schedule(new Runnable() {
+    	                public void run() {
+    	                    String[] args = {"restart"};
+    	                    try {
+    	                        main(args);
+    	                    } catch(Exception e) {
+    	                        e.printStackTrace();
+    	                    }
+    	                }
+    	            }, 3 * 1000);
+    	        } else if(command.contains("prefixsay")) {
+    	            StringBuilder sb = new StringBuilder();
+    	            System.out.println("What would you like the msg prefix to be ?");
+    	            input = sc.nextLine();
+    	            String prefix = input;
+    	            sb.append("[").append(prefix).append("] ");
+    	            System.out.println("What message to broadcast?");
+    	            String input2 = sc.nextLine();
+    	            String message = input2; //?
+    	            sb.append(message);
+    	            for(ChannelServer ch : ChannelServer.getAllInstances()) {
+    	                for (MapleCharacter plr : ch.getPlayerStorage().getAllCharacters()) {
+    	                    plr.dcolormsg(5, sb.toString());
+    	                }
+    	            }
+    	            restartlistener();
+    	        }
+    	}
+       
+    }
+    public static void restartlistener() {
+        listenCommand();
+    }
     public static void main(final String args[]) throws InterruptedException, IOException {
         instance.run();
     }
+    
+    
+    
 }

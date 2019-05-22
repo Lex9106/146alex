@@ -10,7 +10,9 @@ public class ServerConstants {
             SQL_DATABASE = "Crimsonstoryv144",
             SQL_USER = "root",
             SQL_PASSWORD = "alex";
-
+    public static boolean ALEX = true; // not translate
+    public static boolean TRANSTALE = false; // translate Alpha
+    
     public static byte Class_Bonus_EXP(final int job) {
         switch (job) {
             case 501:
@@ -66,7 +68,10 @@ public class ServerConstants {
     public static final byte SHOP_DISCOUNT = 0; //Discount Rate (%) Higher than 100 or lower than 1 means no discount
 
     
-
+    public static final byte MIN_EXPMOB_TOLEVEL = 25; // chênh l?ch gi?a c?p ?? quái v?t và ng??i ch?i khi không có nhóm
+    public static final byte LEADER_LEVEL_MEMBER = 60;     //Kiem tra nhan kinh nghiem
+    public static final byte MEMBER_LEVEL_MONSTER = 20;
+    public static final byte LEADER_LEVEL_MONSTER = 20;
     public static enum PlayerGMRank {
 
         NORMAL('@', 0),

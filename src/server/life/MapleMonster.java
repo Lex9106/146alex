@@ -1389,8 +1389,12 @@ public class MapleMonster extends AbstractLoadedMapleLife {
         @Override
         public void killedMob(final MapleMap map, final int baseExp, final boolean mostDamage, final int lastSkill) {
             final MapleCharacter chr = map.getCharacterById(chrid);
-            if (chr != null && chr.isAlive()) {
-                giveExpToCharacter(chr, baseExp, mostDamage, 1, (byte) 0, (byte) 0, (byte) 0, lastSkill);
+            if (chr != null && chr.isAlive() ) { 
+                if(stats.getLevel() - chr.getLevel() <= ServerConstants.MIN_EXPMOB_TOLEVEL ){// ki?m tra n?u c?p ?? qu?- c?p ?? ng ch?i <=10
+                    giveExpToCharacter(chr, baseExp, mostDamage, 1, (byte) 0, (byte) 0, (byte) 0, lastSkill);
+                }else{
+                if(ServerConstants.TRANSTALE) chr.dropMessage(5, "C¬p «Ø cça b¢n: "+ chr.getLevel() +", Quái v±t: "+ stats.getLevel()+".TÑi «a là 20 «º nh±n kinh nghi½m");
+                }
             }
         }
 
@@ -1530,7 +1534,10 @@ public class MapleMonster extends AbstractLoadedMapleLife {
                 Premium_Bonus_EXP = 0;
                 expApplicable = new ArrayList<>();
                 for (final MaplePartyCharacter partychar : party.getMembers()) {
-                    if (attacker.getKey().getLevel() - partychar.getLevel() <= 5 || stats.getLevel() - partychar.getLevel() <= 5) {
+                    if (
+                         partychar.getLevel() - attacker.getKey().getLevel() <= ServerConstants.LEADER_LEVEL_MEMBER 
+                        && stats.getLevel() - partychar.getLevel() <= ServerConstants.MEMBER_LEVEL_MONSTER 
+                        && stats.getLevel() - attacker.getKey().getLevel() <=  ServerConstants.LEADER_LEVEL_MONSTER ) {
                         pchr = map.getCharacterById(partychar.getId());
                         if (pchr != null && pchr.isAlive()) {
                             expApplicable.add(pchr);

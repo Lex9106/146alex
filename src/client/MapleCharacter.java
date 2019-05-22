@@ -3736,7 +3736,7 @@ public class MapleCharacter extends AnimatedMapleMapObject implements Serializab
                 }
                 makeHaku();
             }
-            //checkForceShield();
+            checkForceShield();
         } catch (Exception e) {
            // FileoutputUtil.outputFileError(FileoutputUtil.ScriptEx_Log, e); //all jobs throw errors :(
         }
@@ -6894,6 +6894,10 @@ public class MapleCharacter extends AnimatedMapleMapObject implements Serializab
         this.rebuy = rebuy;
     }
 
+	public void dcolormsg(int color, String message) {
+		client.getSession().write(CField.getGameMessage(color, message));
+	}
+
     public static enum FameStatus {
 
         OK,
@@ -7020,7 +7024,7 @@ public class MapleCharacter extends AnimatedMapleMapObject implements Serializab
     this.map.broadcastMessage(this, CWvsContext.BuffPacket.giveForeignDebuff(this.id, disease, skillid, level, x), false);
     }
     
-    public void ApplyPoison(boolean Cure) {
+    public void ApplyPoison(final boolean Cure) {
      final long durationFinal = PoisonDuration;
             final AtomicInteger runCount = new AtomicInteger();
             final java.util.Timer DoTTimer = new java.util.Timer(); //Declaring a new timer here each time will force the previous timer to clean up automatically via GC;

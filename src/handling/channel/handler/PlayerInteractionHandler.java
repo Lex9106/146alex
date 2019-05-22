@@ -335,16 +335,16 @@ public class PlayerInteractionHandler {
                 }
                 slea.skip(1); // 9?
                 byte type = slea.readByte(); // 6?
-                if (type != 6) {
+                if (type != 5) {
                     c.getSession().write(CWvsContext.enableActions());
                     return;
                 }
-                final String password = slea.readMapleAsciiString();
+                /*final String password = slea.readMapleAsciiString();
                 if (!c.CheckSecondPassword(password) || password.length() < 6 || password.length() > 16) {
                 	chr.dropMessage(5, "Please enter a valid PIC.");
                 	c.getSession().write(CWvsContext.enableActions());
                 	return;
-                }				
+                }*/				
                 final int obid = slea.readInt();
                 MapleMapObject ob = chr.getMap().getMapObject(obid, MapleMapObjectType.HIRED_MERCHANT);
                 if (ob == null || chr.getPlayerShop() != null) {
