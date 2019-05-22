@@ -55,7 +55,7 @@ public class AranBuff extends AbstractBuffClass {
                 eff.statups.put(MapleBuffStat.ENHANCED_MDEF, eff.info.get(MapleStatInfo.emdd));
                 break;
             case 21111009: // Combo Recharge
-                eff.statups.put(MapleBuffStat.ARAN_COMBO, eff.info.get(MapleStatInfo.x));
+                eff.statups.put(MapleBuffStat.ARAN_COMBO, eff.info.get(MapleStatInfo.y));
                 break;
             case 21111012: // Maha Blessing
                 eff.statups.put(MapleBuffStat.MATK, eff.info.get(MapleStatInfo.mad));
