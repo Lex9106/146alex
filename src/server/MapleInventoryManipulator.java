@@ -98,12 +98,12 @@ public class MapleInventoryManipulator {
         eq.setSocket1(0);
         }
         if (reqLevel >= 60 && !ii.isCash(eq.getItemId()) && eq.getUpgradeSlots() > 0 && !GameConstants.isMechanic(eq.getItemId()) && !GameConstants.isDragon(eq.getItemId())) {
-        if (Randomizer.nextInt(100) >= 85) {
+        if (Randomizer.nextInt(250) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
         eq.setSocket2(randomSkill);
         }
-        else if (Randomizer.nextInt(100) <= 3 || c.getPlayer().isSuperGM()) {
+        else if (Randomizer.nextInt(500) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
@@ -114,80 +114,6 @@ public class MapleInventoryManipulator {
         eq.setSocket1(0);   
         }
         }
-        final String msg = ii.getName(eq.getItemId());
-        final String socket2 = ii.getName(eq.getSocket2());
-        final String socket3 = ii.getName(eq.getSocket3());
-        if (eq.getPotential1() == -17 && eq.getSocket2() > 0 && eq.getSocket3() > 0) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Rare potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -18 && eq.getSocket2() > 0 && eq.getSocket3() > 0 ) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Epic potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -19 && eq.getSocket2() > 0 && eq.getSocket3() > 0) {   
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Unique potential and strenghted with 2 additional Nebulite Sockets, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Unique potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        if (eq.getPotential1() == -20 && eq.getSocket2() > 0 && eq.getSocket3() > 0) {   
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Legendary potential and strenghted with 2 additional Nebulite Sockets, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Legendary potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (eq.getPotential1() == -17 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Rare potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -18 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Epic potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -19 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {    
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Unique potential and strenghted with 1 additional Nebulite Socket, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Unique potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        if (eq.getPotential1() == -20 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {      
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Legendary potential and strenghted with 1 additional Nebulite Socket, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Legendary potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (eq.getPotential1() == -17 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {       
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Rare potential!");
-        }
-        if (eq.getPotential1() == -18 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {       
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Epic potential!");
-        }
-        if (eq.getPotential1() == -19 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {       
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Unique potential, congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Unique potential, congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        if (eq.getPotential1() == -20 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {      
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Legendary potential, congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Legendary potential, congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        InventoryHandler.Reveal(item , c);
         }
             }
         return newSlot;
@@ -237,12 +163,12 @@ public class MapleInventoryManipulator {
         eq.setSocket1(0);
         }
         if (!ii.isCash(eq.getItemId()) && eq.getUpgradeSlots() > 0 && !GameConstants.isMechanic(eq.getItemId()) && !GameConstants.isDragon(eq.getItemId())) {
-        if (Randomizer.nextInt(100) >= 85) {
+        if (Randomizer.nextInt(250) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
         eq.setSocket2(randomSkill);
         }
-        else if (Randomizer.nextInt(100) <= 3 || c.getPlayer().isSuperGM()) {
+        else if (Randomizer.nextInt(500) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
@@ -254,18 +180,18 @@ public class MapleInventoryManipulator {
         }
         }
         if (eq.getUpgradeSlots() <= 0 || GameConstants.isMechanic(eq.getItemId()) || GameConstants.isDragon(eq.getItemId())) {
-        if (Randomizer.nextInt(100) >= 85) {
+        if (Randomizer.nextInt(100) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(randomSkill);
         }
-        else if (Randomizer.nextInt(100) >= 95) {
+        else if (Randomizer.nextInt(250) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(randomSkill);
-        eq.setSocket2(randomSkill2);  
+        eq.setSocket2(randomSkill2);
         c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
         }
-        else if (Randomizer.nextInt(100) >= 99 || c.getPlayer().isSuperGM()) {
+        else if (Randomizer.nextInt(500) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill3 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];   
@@ -275,80 +201,6 @@ public class MapleInventoryManipulator {
         c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
         }
         }
-        final String msg = ii.getName(eq.getItemId());
-        final String socket2 = ii.getName(eq.getSocket2());
-        final String socket3 = ii.getName(eq.getSocket3());
-        if (eq.getPotential1() == -17 && eq.getSocket2() > 0 && eq.getSocket3() > 0) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Rare potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -18 && eq.getSocket2() > 0 && eq.getSocket3() > 0 ) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Epic potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -19 && eq.getSocket2() > 0 && eq.getSocket3() > 0) {   
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Unique potential and strenghted with 2 additional Nebulite Sockets, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Unique potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        if (eq.getPotential1() == -20 && eq.getSocket2() > 0 && eq.getSocket3() > 0) {   
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Legendary potential and strenghted with 2 additional Nebulite Sockets, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Legendary potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (eq.getPotential1() == -17 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Rare potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -18 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Epic potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -19 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {    
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Unique potential and strenghted with 1 additional Nebulite Socket, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Unique potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        if (eq.getPotential1() == -20 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {      
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Legendary potential and strenghted with 1 additional Nebulite Socket, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Legendary potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (eq.getPotential1() == -17 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {       
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Rare potential!");
-        }
-        if (eq.getPotential1() == -18 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {       
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Epic potential!");
-        }
-        if (eq.getPotential1() == -19 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {       
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Unique potential, congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Unique potential, congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        if (eq.getPotential1() == -20 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {      
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Legendary potential, congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Legendary potential, congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        InventoryHandler.Reveal(item , c);
         }
             }
         return newSlot;
@@ -541,12 +393,12 @@ public class MapleInventoryManipulator {
         eq.setSocket1(0);
         }
         if (reqLevel >= 60 && !ii.isCash(eq.getItemId()) && eq.getUpgradeSlots() > 0 && !GameConstants.isMechanic(eq.getItemId()) && !GameConstants.isDragon(eq.getItemId())) {
-        if (Randomizer.nextInt(100) >= 85) {
+       if (Randomizer.nextInt(250) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
         eq.setSocket2(randomSkill);
         }
-        else if (Randomizer.nextInt(100) <= 3 || c.getPlayer().isSuperGM()) {
+        else if (Randomizer.nextInt(500) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
@@ -557,80 +409,6 @@ public class MapleInventoryManipulator {
         eq.setSocket1(0);   
         }
         }
-        final String msg = ii.getName(eq.getItemId());
-        final String socket2 = ii.getName(eq.getSocket2());
-        final String socket3 = ii.getName(eq.getSocket3());
-        if (eq.getPotential1() == -17 && eq.getSocket2() > 0 && eq.getSocket3() > 0) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Rare potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -18 && eq.getSocket2() > 0 && eq.getSocket3() > 0 ) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Epic potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -19 && eq.getSocket2() > 0 && eq.getSocket3() > 0) {   
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Unique potential and strenghted with 2 additional Nebulite Sockets, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Unique potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        if (eq.getPotential1() == -20 && eq.getSocket2() > 0 && eq.getSocket3() > 0) {   
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Legendary potential and strenghted with 2 additional Nebulite Sockets, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Legendary potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (eq.getPotential1() == -17 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Rare potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -18 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Epic potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -19 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {    
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Unique potential and strenghted with 1 additional Nebulite Socket, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Unique potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        if (eq.getPotential1() == -20 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {      
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Legendary potential and strenghted with 1 additional Nebulite Socket, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Legendary potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (eq.getPotential1() == -17 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {       
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Rare potential!");
-        }
-        if (eq.getPotential1() == -18 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {       
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Epic potential!");
-        }
-        if (eq.getPotential1() == -19 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {       
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Unique potential, congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Unique potential, congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        if (eq.getPotential1() == -20 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {      
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Legendary potential, congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Legendary potential, congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        InventoryHandler.Reveal(nEquip , c);
         }
                 ii.randomizeStats((Equip) ii.getEquipById(itemId), c.getPlayer(), c.getPlayer().getClient());
                 if (owner != null) {
@@ -764,10 +542,10 @@ public class MapleInventoryManipulator {
         if (reqLevel >= 60 && !ii.isCash(eq.getItemId()) && eq.getUpgradeSlots() > 0 && !GameConstants.isMechanic(eq.getItemId()) && !GameConstants.isDragon(eq.getItemId())) {
         eq.setSocket1(0);
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite(100,eq.getItemId()).length)];
-        if (Randomizer.nextInt(100) >= 85) {
+        if (Randomizer.nextInt(250) == 1) {
         eq.setSocket2(randomSkill);
         }
-        else if (Randomizer.nextInt(100) <= 3 || c.getPlayer().isSuperGM()) {
+        else if (Randomizer.nextInt(500) == 1) {
         eq.setSocket2(randomSkill);
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite(100,eq.getItemId()).length)];
         eq.setSocket3(randomSkill2);
@@ -776,81 +554,7 @@ public class MapleInventoryManipulator {
         eq.setSocket1(0);   
         }
         }
-        final String msg = ii.getName(eq.getItemId());
-        final String socket2 = ii.getName(eq.getSocket2());
-        final String socket3 = ii.getName(eq.getSocket3());
-        if (eq.getPotential1() == -17 && eq.getSocket2() > 0 && eq.getSocket3() > 0) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Rare potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -18 && eq.getSocket2() > 0 && eq.getSocket3() > 0 ) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Epic potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -19 && eq.getSocket2() > 0 && eq.getSocket3() > 0) {   
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Unique potential and strenghted with 2 additional Nebulite Sockets, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Unique potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        if (eq.getPotential1() == -20 && eq.getSocket2() > 0 && eq.getSocket3() > 0) {   
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Legendary potential and strenghted with 2 additional Nebulite Sockets, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Legendary potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (eq.getPotential1() == -17 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Rare potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -18 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Epic potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -19 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {    
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Unique potential and strenghted with 1 additional Nebulite Socket, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Unique potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        if (eq.getPotential1() == -20 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {      
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Legendary potential and strenghted with 1 additional Nebulite Socket, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Legendary potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (eq.getPotential1() == -17 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {       
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Rare potential!");
-        }
-        if (eq.getPotential1() == -18 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {       
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Epic potential!");
-        }
-        if (eq.getPotential1() == -19 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {       
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Unique potential, congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Unique potential, congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        if (eq.getPotential1() == -20 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {      
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Legendary potential, congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Legendary potential, congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        InventoryHandler.Reveal(item , c);
-        }
+                }
                 return item;
             } else {
                 throw new InventoryException("Trying to create equip with non-one quantity");
@@ -958,12 +662,12 @@ public class MapleInventoryManipulator {
         eq.setSocket1(0);
         }
         if (reqLevel >= 60 && !ii.isCash(eq.getItemId()) && eq.getUpgradeSlots() > 0 && !GameConstants.isMechanic(eq.getItemId()) && !GameConstants.isDragon(eq.getItemId())) {
-        if (Randomizer.nextInt(100) >= 75) {
+        if (Randomizer.nextInt(250) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
         eq.setSocket2(randomSkill);
         }
-        else if (Randomizer.nextInt(100) <= 5 || c.getPlayer().isSuperGM()) {
+        else if (Randomizer.nextInt(500) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
@@ -974,80 +678,6 @@ public class MapleInventoryManipulator {
         eq.setSocket1(0);   
         }
         }
-        final String msg = ii.getName(eq.getItemId());
-        final String socket2 = ii.getName(eq.getSocket2());
-        final String socket3 = ii.getName(eq.getSocket3());
-        if (eq.getPotential1() == -17 && eq.getSocket2() > 0 && eq.getSocket3() > 0) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Rare potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -18 && eq.getSocket2() > 0 && eq.getSocket3() > 0 ) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Epic potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -19 && eq.getSocket2() > 0 && eq.getSocket3() > 0) {   
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Unique potential and strenghted with 2 additional Nebulite Sockets, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Unique potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        if (eq.getPotential1() == -20 && eq.getSocket2() > 0 && eq.getSocket3() > 0) {   
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Legendary potential and strenghted with 2 additional Nebulite Sockets, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Legendary potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (eq.getPotential1() == -17 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Rare potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -18 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Epic potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -19 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {    
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Unique potential and strenghted with 1 additional Nebulite Socket, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Unique potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        if (eq.getPotential1() == -20 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {      
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Legendary potential and strenghted with 1 additional Nebulite Socket, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Legendary potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (eq.getPotential1() == -17 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {       
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Rare potential!");
-        }
-        if (eq.getPotential1() == -18 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {       
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Epic potential!");
-        }
-        if (eq.getPotential1() == -19 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {       
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Unique potential, congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Unique potential, congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        if (eq.getPotential1() == -20 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {      
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Legendary potential, congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Legendary potential, congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        InventoryHandler.Reveal(item , c);
         }
                 return item;
             } else {
@@ -1158,12 +788,12 @@ public class MapleInventoryManipulator {
         eq.setSocket1(0);
         }
         if (reqLevel >= 60 && !ii.isCash(eq.getItemId()) && eq.getUpgradeSlots() > 0 && !GameConstants.isMechanic(eq.getItemId()) && !GameConstants.isDragon(eq.getItemId())) {
-        if (Randomizer.nextInt(100) >= 85) {
+        if (Randomizer.nextInt(250) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
         eq.setSocket2(randomSkill);
         }
-        else if (Randomizer.nextInt(100) <= 3 || c.getPlayer().isSuperGM()) {
+        else if (Randomizer.nextInt(500) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
@@ -1174,80 +804,6 @@ public class MapleInventoryManipulator {
         eq.setSocket1(0);   
         }
         }
-        final String msg = ii.getName(eq.getItemId());
-        final String socket2 = ii.getName(eq.getSocket2());
-        final String socket3 = ii.getName(eq.getSocket3());
-        if (eq.getPotential1() == -17 && eq.getSocket2() > 0 && eq.getSocket3() > 0) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Rare potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -18 && eq.getSocket2() > 0 && eq.getSocket3() > 0 ) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Epic potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -19 && eq.getSocket2() > 0 && eq.getSocket3() > 0) {   
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Unique potential and strenghted with 2 additional Nebulite Sockets, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Unique potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        if (eq.getPotential1() == -20 && eq.getSocket2() > 0 && eq.getSocket3() > 0) {   
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Legendary potential and strenghted with 2 additional Nebulite Sockets, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Legendary potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (eq.getPotential1() == -17 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Rare potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -18 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Epic potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -19 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {    
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Unique potential and strenghted with 1 additional Nebulite Socket, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Unique potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        if (eq.getPotential1() == -20 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {      
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Legendary potential and strenghted with 1 additional Nebulite Socket, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Legendary potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (eq.getPotential1() == -17 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {       
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Rare potential!");
-        }
-        if (eq.getPotential1() == -18 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {       
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Epic potential!");
-        }
-        if (eq.getPotential1() == -19 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {       
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Unique potential, congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Unique potential, congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        if (eq.getPotential1() == -20 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {      
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Legendary potential, congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Legendary potential, congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        InventoryHandler.Reveal(item , c);
         }
             } else {
                 throw new RuntimeException("Trying to create equip with non-one quantity");
@@ -1360,12 +916,12 @@ public class MapleInventoryManipulator {
         eq.setSocket1(0);
         }
         if (!ii.isCash(eq.getItemId()) && eq.getUpgradeSlots() > 0 && !GameConstants.isMechanic(eq.getItemId()) && !GameConstants.isDragon(eq.getItemId())) {
-        if (Randomizer.nextInt(100) >= 85) {
+        if (Randomizer.nextInt(250) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
         eq.setSocket2(randomSkill);
         }
-        else if (Randomizer.nextInt(100) <= 3 || c.getPlayer().isSuperGM()) {
+        else if (Randomizer.nextInt(500) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
@@ -1377,18 +933,18 @@ public class MapleInventoryManipulator {
         }
         }
         if (eq.getUpgradeSlots() <= 0 || GameConstants.isMechanic(eq.getItemId()) || GameConstants.isDragon(eq.getItemId())) {
-        if (Randomizer.nextInt(100) >= 85) {
+        if (Randomizer.nextInt(100) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(randomSkill);
         }
-        else if (Randomizer.nextInt(100) >= 95) {
+        else if (Randomizer.nextInt(250) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(randomSkill);
         eq.setSocket2(randomSkill2);
         c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
         }
-        else if (Randomizer.nextInt(100) >= 99 || c.getPlayer().isSuperGM()) {
+        else if (Randomizer.nextInt(500) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill3 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];   
@@ -1398,80 +954,6 @@ public class MapleInventoryManipulator {
         c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
         }
         }
-        final String msg = ii.getName(eq.getItemId());
-        final String socket2 = ii.getName(eq.getSocket2());
-        final String socket3 = ii.getName(eq.getSocket3());
-        if (eq.getPotential1() == -17 && eq.getSocket2() > 0 && eq.getSocket3() > 0) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Rare potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -18 && eq.getSocket2() > 0 && eq.getSocket3() > 0 ) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Epic potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -19 && eq.getSocket2() > 0 && eq.getSocket3() > 0) {   
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Unique potential and strenghted with 2 additional Nebulite Sockets, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Unique potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        if (eq.getPotential1() == -20 && eq.getSocket2() > 0 && eq.getSocket3() > 0) {   
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Legendary potential and strenghted with 2 additional Nebulite Sockets, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Legendary potential and strenghted with " + socket2 + " and " + socket3 + " Congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (eq.getPotential1() == -17 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Rare potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -18 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {   
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Epic potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        }
-        if (eq.getPotential1() == -19 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {    
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Unique potential and strenghted with 1 additional Nebulite Socket, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Unique potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        if (eq.getPotential1() == -20 && eq.getSocket2() > 0 && eq.getSocket3() < 0) {      
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Legendary potential and strenghted with 1 additional Nebulite Socket, Congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Legendary potential and strenghted with " + socket2 + " congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("Romio/discovery"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (eq.getPotential1() == -17 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {       
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Rare potential!");
-        }
-        if (eq.getPotential1() == -18 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {       
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Epic potential!");
-        }
-        if (eq.getPotential1() == -19 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {       
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Unique potential, congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Unique potential, congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        if (eq.getPotential1() == -20 && eq.getSocket2() < 0 && eq.getSocket3() < 0) {      
-        c.getPlayer().dropMessage(-1, msg + " was acquired with Legendary potential, congrats!");
-        c.getPlayer().dropMessage(-5, msg + " was acquired with Legendary potential, congrats!");
-        c.getPlayer().getClient().getSession().write(CField.playSound("rootabyss/firework"));
-        c.getPlayer().getClient().getSession().write(CField.playSound("5th_Maple/gaga"));
-        c.getPlayer().getClient().getSession().write(CField.showEffect("event/lucky"));
-        }
-        InventoryHandler.Reveal(item , c);
         }
             } else {
                 throw new RuntimeException("Trying to create equip with non-one quantity");
