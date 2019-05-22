@@ -1226,7 +1226,7 @@ public class MapScriptMethods {
             }
             default: {
                 System.out.println("Unhandled script : " + scriptName + ", type : onFirstUserEnter - MAPID " + c.getPlayer().getMapId());
-                //FileoutputUtil.log(FileoutputUtil.ScriptEx_Log, "Unhandled script : " + scriptName + ", type : onFirstUserEnter - MAPID " + c.getPlayer().getMapId());
+                FileoutputUtil.log(FileoutputUtil.ScriptEx_Log, "Unhandled script : " + scriptName + ", type : onFirstUserEnter - MAPID " + c.getPlayer().getMapId());
                 break;
             }
         }
@@ -1559,7 +1559,7 @@ public class MapScriptMethods {
                     c.getSession().write(UIPacket.getDirectionInfo("Effect/Direction3.img/effect/tuto/BalloonMsg0/3", 2100, 0, -120, 0, 0));
                     c.getSession().write(UIPacket.getDirectionInfo(1, 1800));
                     Thread.sleep(1800);
-                    c.getSession().write(CWvsContext.getTopMsg("Press the Ctrl key to use normal attacks."));
+                    c.getSession().write(CWvsContext.getTopMsg("Nh¬n phím Ctrl «º t¬n công b¾nh thïßng."));
                 } catch (InterruptedException e) {
                 }
                 c.getSession().write(UIPacket.IntroEnableUI(0));
@@ -1592,7 +1592,7 @@ public class MapScriptMethods {
                     c.getSession().write(UIPacket.getDirectionInfo(1, 2100));
                     Thread.sleep(2100);
                     c.getSession().write(UIPacket.getDirectionEffect("Effect/Direction3.img/effect/tuto/key/2", 3000000, -520, -740));
-                    c.getSession().write(CWvsContext.getTopMsg("Press the down key and Alt at the same time to go down."));
+                    c.getSession().write(CWvsContext.getTopMsg("Nh¬n phím xuÑng và Alt cùng lúc «º «i xuÑng."));
                 } catch (InterruptedException e) {
                 }
                 c.getSession().write(UIPacket.IntroEnableUI(0));
@@ -3103,7 +3103,7 @@ public class MapScriptMethods {
                     @Override
                     public void run() {
                         c.getSession().write(UIPacket.getDirectionInfo(3, 0));
-                        c.getPlayer().dropMessage(-1, "Heh heh heh, nguoi da cham soc no tot that day!");
+                        c.getPlayer().dropMessage(-1, "Heh heh heh, ngïÛi «» ch£m sóc nó tÑt th±t «¬y!");
                         try {
                             Thread.sleep(200);
                         } catch (InterruptedException e) {
@@ -3560,7 +3560,7 @@ public class MapScriptMethods {
             }
             default: {
                 System.out.println("Unhandled script : " + scriptName + ", type : onUserEnter - MAPID " + c.getPlayer().getMapId());
-                //FileoutputUtil.log(FileoutputUtil.ScriptEx_Log, "Unhandled script : " + scriptName + ", type : onUserEnter - MAPID " + c.getPlayer().getMapId());
+                FileoutputUtil.log(FileoutputUtil.ScriptEx_Log, "Unhandled script : " + scriptName + ", type : onUserEnter - MAPID " + c.getPlayer().getMapId());
                 break;
             }
         }
