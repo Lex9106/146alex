@@ -959,7 +959,7 @@ public class PlayerStats implements Serializable {
         return psdSkills;
     }
 
-    private void handlePassiveSkills(final MapleCharacter chra) {
+    private void handlePassiveSkills(MapleCharacter chra) {
         Skill bx;
         int bof;
         MapleStatEffect eff;
@@ -3826,6 +3826,17 @@ public class PlayerStats implements Serializable {
             shouldHealMPFamiliar = getCurrentMaxMp(chra.getJob()) * chra.getBuffedValue(MapleBuffStat.MPrecoverFamiliar) / 100;
             mpRecoverTimeFamiliar = chra.getBuffedValue(MapleBuffStat.INTERVAL);
  
+        }
+        if (GameConstants.isAran(chra.getJob())) {
+            final Skill effect = SkillFactory.getSkill(21101005); // Combo Drain
+            final int lvl = chra.getSkillLevel(effect);
+            if (lvl > 0) {
+                MapleStatEffect eff = effect.getEffect(lvl);
+                    shouldHealHP += eff.getX() * chra.getStat().getCurrentMaxHp() / 100;
+                    hpRecoverTime = 4000;
+ 
+           }
+
         }
         if (playerjob == 111 || playerjob == 112) {
             final Skill effect = SkillFactory.getSkill(1110000); // Improving MP Recovery
