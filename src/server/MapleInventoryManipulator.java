@@ -103,7 +103,7 @@ public class MapleInventoryManipulator {
         eq.setSocket1(0);
         eq.setSocket2(randomSkill);
         }
-        else if (Randomizer.nextInt(100) == 1) {
+        else if (Randomizer.nextInt(250) == 1) {
         int randomSkill = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         int randomSkill2 = GameConstants.getRandomNebulite(Randomizer.nextInt(100), eq.getItemId())[(int) Math.floor(Math.random() * GameConstants.getRandomNebulite((int) (Math.random() * Randomizer.nextInt(100)),eq.getItemId()).length)];
         eq.setSocket1(0);
