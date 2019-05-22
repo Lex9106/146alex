@@ -1939,42 +1939,53 @@ public static int Invincibility = 0;
         }
         int projectile = 0;
         int visProjectile = 0;
-        if ((!AOE) && (chr.getBuffedValue(MapleBuffStat.SOULARROW) == null) && (!noBullet)) {
-            Item ipp = chr.getInventory(MapleInventoryType.USE).getItem((short) attack.slot);
-            if (ipp == null) {
-                return;
-            }
-            projectile = ipp.getItemId();
-
-            if (attack.csstar > 0) {
-                if (chr.getInventory(MapleInventoryType.CASH).getItem((short) attack.csstar) == null) {
-                    return;
+        if (chr.getBuffedValue(MapleBuffStat.SOULARROW) == null && attack.skill != 4111004 && !GameConstants.isMercedes(chr.getJob()) && (GameConstants.isUsingArrowForBowJob(chr.getJob()) || GameConstants.isUsingArrowForCrossBowJob(chr.getJob()) || GameConstants.isUsingStarJob(chr.getJob()) || GameConstants.isUsingBulletJob(chr.getJob()))) {
+            if (attack.slot == 0) {
+                for (Item item : chr.getInventory(MapleInventoryType.USE).list()) {
+                    if (GameConstants.isUsingBulletJob(chr.getJob()) && GameConstants.isBullet(item.getItemId())) {
+                        projectile = item.getItemId();
+                    } else if (GameConstants.isUsingStarJob(chr.getJob()) && GameConstants.isThrowingStar(item.getItemId())) {
+                        projectile = item.getItemId();
+                    } else if (GameConstants.isUsingArrowForBowJob(chr.getJob()) && GameConstants.isArrowForBow(item.getItemId())) {
+                        projectile = item.getItemId();
+                    } else {
+                        if (!GameConstants.isUsingArrowForCrossBowJob(chr.getJob()) || !GameConstants.isArrowForCrossBow(item.getItemId())) continue;
+                        projectile = item.getItemId();
+                    }
+                    break;
                 }
-                visProjectile = chr.getInventory(MapleInventoryType.CASH).getItem((short) attack.csstar).getItemId();
             } else {
-                visProjectile = projectile;
+                projectile = chr.getInventory(MapleInventoryType.USE).getItem(attack.slot).getItemId();
             }
-
-            if (chr.getBuffedValue(MapleBuffStat.SPIRIT_CLAW) == null) {
+            boolean termed = false;
+            if (projectile == 0) {
+                if (chr.getJob() >= 3500 && chr.getJob() <= 3512) {
+                    projectile = 2330000;
+                }
+                if (chr.getJob() == 501 || chr.getJob() >= 530 && chr.getJob() <= 533) {
+                    projectile = 2330000;
+                }
+                if (projectile == 0) {
+                    projectile = 0;
+                }
+                termed = true;
+            }
+            visProjectile = attack.csstar > 0 ? chr.getInventory(MapleInventoryType.CASH).getItem(attack.csstar).getItemId() : projectile;
+            if (chr.getBuffedValue(MapleBuffStat.SOULARROW) == null && !termed) {
+                MapleStatEffect eff;
+                Skill expert;
+                Item ipp = chr.getInventory(MapleInventoryType.USE).getItem(attack.slot);
                 int bulletConsume = bulletCount;
-                if ((effect != null) && (effect.getBulletConsume() != 0)) {
+                if (effect != null && effect.getBulletConsume() != 0) {
                     bulletConsume = effect.getBulletConsume() * (ShadowPartner != null ? 2 : 1);
                 }
-                if ((chr.getJob() == 412) && (bulletConsume > 0) && (ipp.getQuantity() < MapleItemInformationProvider.getInstance().getSlotMax(projectile))) {
-                    Skill expert = SkillFactory.getSkill(4120010);
-                    if (chr.getTotalSkillLevel(expert) > 0) {
-                        MapleStatEffect eff = expert.getEffect(chr.getTotalSkillLevel(expert));
-                        if (eff.makeChanceResult()) {
-                            ipp.setQuantity((short) (ipp.getQuantity() + 1));
-                            c.getSession().write(CWvsContext.InventoryPacket.updateInventorySlot(MapleInventoryType.USE, ipp, false));
-                            bulletConsume = 0;
-                            c.getSession().write(CWvsContext.InventoryPacket.getInventoryStatus());
-                        }
-                    }
+                if ((chr.getJob() == 411 || chr.getJob() == 412) && bulletConsume > 0 && ipp.getQuantity() < MapleItemInformationProvider.getInstance().getSlotMax(projectile) && chr.getBuffedValue(MapleBuffStat.SPIRIT_CLAW) == null && chr.getSkillLevel(expert = SkillFactory.getSkill(4110012)) > 0 && (eff = expert.getEffect(chr.getSkillLevel(expert))).makeChanceResult()) {
+                    ipp.setQuantity((short)(ipp.getQuantity() + 1));
+                    c.getSession().write(CWvsContext.InventoryPacket.updateInventorySlot(MapleInventoryType.USE, ipp, false));
+                    bulletConsume = 0;
                 }
-                if ((bulletConsume > 0) && (!MapleInventoryManipulator.removeById(c, MapleInventoryType.USE, projectile, bulletConsume, false, true))) {
-                    chr.dropMessage(5, "You do not have enough arrows/bullets/stars.");
-                    return;
+                if (bulletConsume > 0) {
+                    MapleInventoryManipulator.removeById(c, MapleInventoryType.USE, projectile, bulletConsume, false, true);
                 }
             }
         } else if ((chr.getJob() >= 3500) && (chr.getJob() <= 3512)) {
