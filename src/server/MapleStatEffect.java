@@ -1053,7 +1053,6 @@ public class MapleStatEffect implements Serializable {
                             break;
                         case 3221014:
                             ret.monsterStatus.put(MonsterStatus.STUN, 1);
-                            ret.statups.put(MapleBuffStat.PUPPET, 1);
                             break;
                         case 3120006:
                         case 3220005:
@@ -4354,13 +4353,11 @@ private boolean isSpiritClaw() {
         //    case 3121013:
             case 36121002:
             case 3221014:
-            case 36121013:                
+            case 36121013:   
             case 36121014:
             //case 3121013:
             case 42111003:
              return SummonMovementType.STATIONARY;
-            case 3211005: // golden eagle
-            case 3111005: // golden hawk
             case 3101007:
             case 3201007:
             case 33111005:
@@ -4392,6 +4389,8 @@ private boolean isSpiritClaw() {
             case 35111001:
             case 35111010://satelite 2
             case 35111009: // satellite 1
+            case 3211005: // golden eagle
+            case 3111005: // golden hawk
             case 42101021: // Foxfire
             case 42121021: // Foxfire
                 return SummonMovementType.FOLLOW;
