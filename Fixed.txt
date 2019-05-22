@@ -1,1 +1,6 @@
-1
+Aran Job:
+Final Final Charge
+Fixed Final Toss
+Fixed Final Blow
+Fixed Combo Drain (as the description says)
+Fixed Combo Recovery HP Req
