@@ -527,7 +527,7 @@ public class CharLoginHandler {
         if (job == JobType.Luminous) {
             StarterItems = new int[]{1212001, 1352400};
         }
-        if (  job == JobType.Adventurer 
+        if (  job == JobType.Explorer 
                 || job == JobType.UltimateAdventurer 
                 || job == JobType.Resistance 
                 || job == JobType.Aran
