@@ -39,21 +39,21 @@ public class LoginInformationProvider {
 
         UltimateAdventurer(-1, 0, 100000000, true, true, false, false, true, false, false, false),
         Resistance(0, 3000, 931000000, true, true, false, false, true, false, false, false),//tutorial works 100%
-        Adventurer(1, 0, 4000000, false, true, false, false, false, false, false, false),
+        Explorer(1, 0, 4000000, false, true, false, false, false, false, false, false),
         Cygnus(2, 1000, 130030000, false, true, false, false, false, true, false, false),
         Aran(3, 2000, 914000000, true, true, false, false, true, false, false, false),
         Evan(4, 2001, 900010000, true, true, false, false, true, false, false, false),//evan starter map - need to test tutorial
         Mercedes(5, 2002, 910150000, false, false, false, false, false, false, false, false),//101050000 - 910150000
-        Demon(6, 3001, 931050310, false, false, true, false, false, false, false, false),
+        Demon(6, 3001, 927000080, false, false, true, false, false, false, false, false),
         Phantom(7, 2003, 915000000, false, true, false, false, false, true, false, false),
         DualBlade(8, 0, 103050900, false, true, false, false, false, false, false, false),//tutorial fixed
         Mihile(9, 5000, 913070000, true, true, false, false, true, false, false, false),
-        Luminous(10, 2004, 931030000, false, true, false, false, false, true, false, false),//Ellinia atm TODO tutorial
+        Luminous(10, 2004, 927020000, false, true, false, false, false, true, false, false),//Ellinia atm TODO tutorial
         Kaiser(11, 6000, 940001000, false, true, false, false, false, false, false, false),
         AngelicBuster(12, 6001, 940011000, false, true, false, false, false, false, false, false),//400000000 - 940011000 - town now TODO tutorial
         Cannoneer(13, 0, 3000000, true, true, false, false, true, false, false, false),//portal problem
         Xenon(14, 3002, 931050920, true, true, true, false, false, false, false, false),
-        Zero(15, 10112, 321000000, false, true, false, false, false, true, false, false),//create tutorial plox
+        Zero(15, 10112, 321100000, false, true, false, false, false, true, false, false),//create tutorial plox
         Jett(16, 0, 552000050, false, false, false, false, false, true, false, false),//End map for tutorial
         Hayato(17, 4001, 807000000, true, true, false, true, false, false, false, false),//half stater map TODO real tutorial
         Kanna(18, 4002, 807040000, true, true, false, true, false, false, false, false),
@@ -77,7 +77,7 @@ public class LoginInformationProvider {
 
         public static JobType getByType(int g) {
             if (g == JobType.Cannoneer.type) {
-                return JobType.Adventurer;
+                return JobType.Explorer;
             }
             for (JobType e : JobType.values()) {
                 if (e.type == g) {
@@ -88,8 +88,8 @@ public class LoginInformationProvider {
         }
 
         public static JobType getById(int g) {
-            if (g == JobType.Adventurer.id) {
-                return JobType.Adventurer;
+            if (g == JobType.Explorer.id) {
+                return JobType.Explorer;
             }
             if (g == 508) {
                 return JobType.Jett;
