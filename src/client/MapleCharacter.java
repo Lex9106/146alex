@@ -1440,6 +1440,8 @@ public class MapleCharacter extends AnimatedMapleMapObject implements Serializab
             return;
         }
         if (dc) {//It needs to restart
+        getClient().getSession().close();//Lets try to force to disconect to not get stuck when you exit the game
+        getClient().disconnect(true, false);
         resetRunningStack();
         FamiliarIdLogin = 0;
         InterServerHandler.tittleHPMP = 0;
