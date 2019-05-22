@@ -1053,7 +1053,6 @@ public class MapleStatEffect implements Serializable {
                             break;
                         case 3221014:
                             ret.monsterStatus.put(MonsterStatus.STUN, 1);
-                            ret.statups.put(MapleBuffStat.PUPPET, 1);
                             break;
                         case 3120006:
                         case 3220005:
@@ -1131,6 +1130,8 @@ public class MapleStatEffect implements Serializable {
                         case 65120006:
                             ret.statups.put(MapleBuffStat.PIRATES_REVENGE, (int) ret.info.get(MapleStatInfo.y));
                             ret.info.put(MapleStatInfo.time, 5000);
+                            break;
+                        case 3210013://Look for BuffStat
                             break;
                         case 31121005:
                             ret.statups.put(MapleBuffStat.DAMAGE_RATE, (int) ret.info.get(MapleStatInfo.damR));
@@ -2706,16 +2707,16 @@ public class MapleStatEffect implements Serializable {
              Skill bx2;
              bx = SkillFactory.getSkill(27111303);
              int bof = applyto.getTotalSkillLevel(bx);
-             final int Duration = bx.getEffect(bof).getCooldown(applyto);
+             int Duration = bx.getEffect(bof).getCooldown(applyto);
              bx2 = SkillFactory.getSkill(27121303);
              int bof2 = applyto.getTotalSkillLevel(bx2);
-             final int Duration2 = bx2.getEffect(bof2).getCooldown(applyto);
+             int Duration2 = bx2.getEffect(bof2).getCooldown(applyto);
              int Level = applyto.getTotalSkillLevel(27120008);
              applyto.removeCooldown(27111303);
              applyto.getClient().getSession().write(CField.skillCooldown(27111303, 0));
              applyto.removeCooldown(27121303);
              applyto.getClient().getSession().write(CField.skillCooldown(27121303, 0));
-             final int getLuminousState = applyto.getLuminousState();
+             int getLuminousState = applyto.getLuminousState();
              applyto.setLuminousState(20040220);
              applyto.Equilibrium = 50;
               applyto.getClient().getSession().write(JobPacket.LuminousPacket.giveLuminousState(20040220, applyto.getLightGauge(), applyto.getDarkGauge(), 10000 + (Level * 1000)));
@@ -2756,15 +2757,15 @@ public class MapleStatEffect implements Serializable {
              Skill bx2;
              bx = SkillFactory.getSkill(27111303);
              int bof = applyto.getTotalSkillLevel(bx);
-             final int Duration = bx.getEffect(bof).getCooldown(applyto);
+             int Duration = bx.getEffect(bof).getCooldown(applyto);
              bx2 = SkillFactory.getSkill(27121303);
              int bof2 = applyto.getTotalSkillLevel(bx2);
-             final int Duration2 = bx.getEffect(bof2).getCooldown(applyto);
+             int Duration2 = bx.getEffect(bof2).getCooldown(applyto);
              int Level = applyto.getTotalSkillLevel(27120008);
              applyto.removeCooldown(27111303);
              applyto.getClient().getSession().write(CField.skillCooldown(27111303, 0));
              applyto.removeCooldown(27121303);
-             final int getLuminousState = applyto.getLuminousState();
+             int getLuminousState = applyto.getLuminousState();
              applyto.setLuminousState(20040220);
              applyto.Equilibrium = 50;
              applyto.getClient().getSession().write(CField.skillCooldown(27121303, 0));
@@ -4354,13 +4355,11 @@ private boolean isSpiritClaw() {
         //    case 3121013:
             case 36121002:
             case 3221014:
-            case 36121013:                
+            case 36121013:   
             case 36121014:
             //case 3121013:
             case 42111003:
              return SummonMovementType.STATIONARY;
-            case 3211005: // golden eagle
-            case 3111005: // golden hawk
             case 3101007:
             case 3201007:
             case 33111005:
@@ -4392,6 +4391,8 @@ private boolean isSpiritClaw() {
             case 35111001:
             case 35111010://satelite 2
             case 35111009: // satellite 1
+            case 3211005: // golden eagle
+            case 3111005: // golden hawk
             case 42101021: // Foxfire
             case 42121021: // Foxfire
                 return SummonMovementType.FOLLOW;
